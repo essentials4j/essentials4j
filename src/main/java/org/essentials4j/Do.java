@@ -35,6 +35,8 @@ public final class Do {
 	private Do() {
 	}
 
+	/* map */
+
 	public static <T> DoMap<T> map(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
@@ -54,6 +56,7 @@ public final class Do {
 		return new DoMap<>(stream);
 	}
 
+	/* group */
 
 	public static <T> DoGroup<T> group(Iterable<T> items) {
 		Objects.requireNonNull(items);
@@ -74,6 +77,7 @@ public final class Do {
 		return new DoGroup<>(stream);
 	}
 
+	/* reduce */
 
 	public static <T> DoReduce<T> reduce(Iterable<T> items) {
 		Objects.requireNonNull(items);

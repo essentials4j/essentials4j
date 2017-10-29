@@ -33,6 +33,16 @@ public final class New {
 	private New() {
 	}
 
+	/* stream */
+
+	public static <T> Stream<T> stream(Iterable<T> items) {
+		Objects.requireNonNull(items);
+
+		return StreamSupport.stream(items.spliterator(), false);
+	}
+
+	/* set */
+
 	public static <T> Set<T> set() {
 		return new LinkedHashSet<>();
 	}
@@ -59,6 +69,8 @@ public final class New {
 		return set;
 	}
 
+	/* list */
+
 	public static <T> List<T> list() {
 		return new ArrayList<>();
 	}
@@ -84,6 +96,8 @@ public final class New {
 
 		return list;
 	}
+
+	/* map */
 
 	public static <K, V> Map<K, V> map() {
 		return new LinkedHashMap<>();
@@ -143,12 +157,6 @@ public final class New {
 		}
 
 		return map;
-	}
-
-	public static <T> Stream<T> stream(Iterable<T> items) {
-		Objects.requireNonNull(items);
-
-		return StreamSupport.stream(items.spliterator(), false);
 	}
 
 }
