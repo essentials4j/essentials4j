@@ -1,4 +1,4 @@
-package org.essentials4j.find;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,8 +20,10 @@ package org.essentials4j.find;
  * #L%
  */
 
+
+import org.essentials4j.To;
+
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.BiPredicate;
 
@@ -29,18 +31,41 @@ import java.util.function.BiPredicate;
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class FindAnyBi<K, V> {
+public class FindBiDSL<K, V> {
 
 	private final Map<K, V> items;
 
-	public FindAnyBi(Map<K, V> items) {
+	public FindBiDSL(Map<K, V> items) {
 		this.items = items;
 	}
 
-	public Optional<Entry<K, V>> where(BiPredicate<K, V> predicate) {
+	public boolean exists(BiPredicate<K, V> predicate) {
+		return items.entrySet().stream()
+			.anyMatch(e -> predicate.test(e.getKey(), e.getValue()));
+	}
+
+	public Optional<Map.Entry<K, V>> first(BiPredicate<K, V> predicate) {
+		return items.entrySet().stream()
+			.filter(e -> predicate.test(e.getKey(), e.getValue()))
+			.findFirst();
+	}
+
+	public Optional<Map.Entry<K, V>> last(BiPredicate<K, V> predicate) {
+		return items.entrySet().stream()
+			.filter(e -> predicate.test(e.getKey(), e.getValue()))
+			.reduce((prev, next) -> next);
+	}
+
+	public Optional<Map.Entry<K, V>> any(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.findAny();
+	}
+
+	public Map<K, V> all(BiPredicate<K, V> predicate) {
+		return items.entrySet().stream()
+			.filter(e -> predicate.test(e.getKey(), e.getValue()))
+			.collect(To.map());
 	}
 
 }

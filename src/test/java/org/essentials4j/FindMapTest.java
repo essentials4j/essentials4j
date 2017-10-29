@@ -38,31 +38,31 @@ public class FindMapTest extends TestCommons {
 
 	@Test
 	public void inExists() {
-		isTrue(Find.in(nums()).exists((k, v) -> k == 2));
-		isFalse(Find.in(nums()).exists((k, v) -> k > 10));
+		isTrue(Do.findIn(nums()).exists((k, v) -> k == 2));
+		isFalse(Do.findIn(nums()).exists((k, v) -> k > 10));
 	}
 
 	@Test
 	public void allOfWhere() {
-		Map<Integer, String> notSmall = Find.allOf(nums()).where((k, v) -> k > 1);
+		Map<Integer, String> notSmall = Do.findIn(nums()).all((k, v) -> k > 1);
 		eq(notSmall, New.map(2, "two", 3, "three"));
 	}
 
 	@Test
 	public void anyOfWhere() {
-		Optional<Entry<Integer, String>> big = Find.anyOf(nums()).where((k, v) -> v.length() == 5);
+		Optional<Entry<Integer, String>> big = Do.findIn(nums()).any((k, v) -> v.length() == 5);
 		eq(big.get(), 3, "three");
 	}
 
 	@Test
 	public void lastOfWhere() {
-		Optional<Entry<Integer, String>> anyBig = Find.lastOf(nums()).where((k, v) -> v.length() > 4);
+		Optional<Entry<Integer, String>> anyBig = Do.findIn(nums()).last((k, v) -> v.length() > 4);
 		eq(anyBig.get(), 3, "three");
 	}
 
 	@Test
 	public void firstOfWhere() {
-		Optional<Entry<Integer, String>> first = Find.firstOf(nums()).where((k, v) -> k >= 2);
+		Optional<Entry<Integer, String>> first = Do.findIn(nums()).first((k, v) -> k >= 2);
 		eq(first.get(), 2, "two");
 	}
 

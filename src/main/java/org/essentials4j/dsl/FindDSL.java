@@ -1,4 +1,4 @@
-package org.essentials4j.find;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,6 +20,10 @@ package org.essentials4j.find;
  * #L%
  */
 
+import org.essentials4j.To;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -27,16 +31,33 @@ import java.util.stream.Stream;
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class FindIn<T> {
+public class FindDSL<T> {
 
 	private final Stream<T> stream;
 
-	public FindIn(Stream<T> stream) {
+	public FindDSL(Stream<T> stream) {
 		this.stream = stream;
 	}
 
 	public boolean exists(Predicate<? super T> predicate) {
 		return stream.anyMatch(predicate);
+	}
+
+	public Optional<T> first(Predicate<? super T> predicate) {
+		return stream.filter(predicate).findFirst();
+	}
+
+	public Optional<T> last(Predicate<? super T> predicate) {
+		return stream.filter(predicate)
+			.reduce((prev, next) -> next);
+	}
+
+	public Optional<T> any(Predicate<? super T> predicate) {
+		return stream.filter(predicate).findAny();
+	}
+
+	public List<T> all(Predicate<? super T> predicate) {
+		return stream.filter(predicate).collect(To.list());
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.essentials4j.dox;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,36 +20,35 @@ package org.essentials4j.dox;
  * #L%
  */
 
+import org.essentials4j.New;
 import org.essentials4j.To;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
+import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.stream.Stream;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class DoMap<T> {
+public class GroupBiDSL<K, V> {
 
-	private final Stream<T> stream;
+	private final Map<K, V> items;
 
-	public DoMap(Stream<T> stream) {
-		this.stream = stream;
+	public GroupBiDSL(Map<K, V> items) {
+		this.items = items;
 	}
 
-	public <R> List<R> toList(Function<T, R> transformation) {
-		return stream.map(transformation).collect(To.list());
-	}
+	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> transformation) {
+		Collector<Entry<K, V>, ?, Map<K, V>> downstream = To.map();
 
-	public <R> Set<R> toSet(Function<T, R> transformation) {
-		return stream.map(transformation).collect(To.set());
-	}
+		Function<Entry<K, V>, R> classifier = e -> transformation.apply(e.getKey(), e.getValue());
 
-	public <K, V> Map<K, V> toMap(Function<T, K> keyMapper, Function<T, V> valueMapper) {
-		return stream.collect(To.map(keyMapper, valueMapper));
+		return items.entrySet().stream()
+			.collect(Collectors.groupingBy(classifier, New::map, downstream));
 	}
 
 }

@@ -37,31 +37,31 @@ public class FindCollTest extends TestCommons {
 
 	@Test
 	public void inExists() {
-		isTrue(Find.in(abc()).exists(s -> s.length() < 5));
-		isFalse(Find.in(abc().stream()).exists(s -> s.length() > 10));
+		isTrue(Do.findIn(abc()).exists(s -> s.length() < 5));
+		isFalse(Do.findIn(abc().stream()).exists(s -> s.length() > 10));
 	}
 
 	@Test
 	public void allOfWhere() {
-		List<String> notSmall = Find.allOf(abc()).where(s -> s.length() > 1);
+		List<String> notSmall = Do.findIn(abc()).all(s -> s.length() > 1);
 		eq(notSmall, New.list("bbbbb", "cc"));
 	}
 
 	@Test
 	public void anyOfWhere() {
-		Optional<String> big = Find.anyOf(abc()).where(s -> s.length() == 5);
+		Optional<String> big = Do.findIn(abc()).any(s -> s.length() == 5);
 		eq(big.get(), "bbbbb");
 	}
 
 	@Test
 	public void lastOfWhere() {
-		Optional<String> anyBig = Find.lastOf(abc()).where(s -> s.length() > 4);
+		Optional<String> anyBig = Do.findIn(abc()).last(s -> s.length() > 4);
 		eq(anyBig.get(), "bbbbb");
 	}
 
 	@Test
 	public void firstOfWhere() {
-		Optional<String> firstSmall = Find.firstOf(abc()).where(s -> s.length() < 3);
+		Optional<String> firstSmall = Do.findIn(abc()).first(s -> s.length() < 3);
 		eq(firstSmall.get(), "a");
 	}
 

@@ -1,4 +1,4 @@
-package org.essentials4j.dox;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -31,11 +31,11 @@ import java.util.function.BiFunction;
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class DoMapBi<K, V> {
+public class MapBiDSL<K, V> {
 
 	private final Map<K, V> items;
 
-	public DoMapBi(Map<K, V> items) {
+	public MapBiDSL(Map<K, V> items) {
 		this.items = items;
 	}
 

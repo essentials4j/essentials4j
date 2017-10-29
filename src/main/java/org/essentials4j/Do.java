@@ -1,6 +1,6 @@
 package org.essentials4j;
 
-import org.essentials4j.dox.*;
+import org.essentials4j.dsl.*;
 
 import java.util.Map;
 import java.util.Objects;
@@ -35,60 +35,80 @@ public final class Do {
 	private Do() {
 	}
 
+	/* findIn */
+
+	public static <T> FindDSL<T> findIn(Iterable<T> items) {
+		Objects.requireNonNull(items);
+
+		return findIn(New.stream(items));
+	}
+
+	public static <K, V> FindBiDSL<K, V> findIn(Map<K, V> items) {
+		Objects.requireNonNull(items);
+
+		return new FindBiDSL<>(items);
+	}
+
+	public static <T> FindDSL<T> findIn(Stream<T> items) {
+		Objects.requireNonNull(items);
+
+		return new FindDSL<>(items);
+	}
+
 	/* map */
 
-	public static <T> DoMap<T> map(Iterable<T> items) {
+	public static <T> MapDSL<T> map(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return map(New.stream(items));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <K, V> DoMapBi<K, V> map(Map<K, V> items) {
+	public static <K, V> MapBiDSL<K, V> map(Map<K, V> items) {
 		Objects.requireNonNull(items);
 
-		return new DoMapBi<>(items);
+		return new MapBiDSL<>(items);
 	}
 
-	public static <T> DoMap<T> map(Stream<T> stream) {
-		Objects.requireNonNull(stream);
+	public static <T> MapDSL<T> map(Stream<T> items) {
+		Objects.requireNonNull(items);
 
-		return new DoMap<>(stream);
+		return new MapDSL<>(items);
 	}
 
 	/* group */
 
-	public static <T> DoGroup<T> group(Iterable<T> items) {
+	public static <T> GroupDSL<T> group(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return group(New.stream(items));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <K, V> DoGroupBi<K, V> group(Map<K, V> items) {
+	public static <K, V> GroupBiDSL<K, V> group(Map<K, V> items) {
 		Objects.requireNonNull(items);
 
-		return new DoGroupBi<>(items);
+		return new GroupBiDSL<>(items);
 	}
 
-	public static <T> DoGroup<T> group(Stream<T> stream) {
-		Objects.requireNonNull(stream);
+	public static <T> GroupDSL<T> group(Stream<T> items) {
+		Objects.requireNonNull(items);
 
-		return new DoGroup<>(stream);
+		return new GroupDSL<>(items);
 	}
 
 	/* reduce */
 
-	public static <T> DoReduce<T> reduce(Iterable<T> items) {
+	public static <T> ReduceDSL<T> reduce(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return reduce(New.stream(items));
 	}
 
-	public static <T> DoReduce<T> reduce(Stream<T> stream) {
-		Objects.requireNonNull(stream);
+	public static <T> ReduceDSL<T> reduce(Stream<T> items) {
+		Objects.requireNonNull(items);
 
-		return new DoReduce<>(stream);
+		return new ReduceDSL<>(items);
 	}
 
 }

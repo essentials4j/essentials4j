@@ -1,4 +1,4 @@
-package org.essentials4j.find;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,25 +20,29 @@ package org.essentials4j.find;
  * #L%
  */
 
-import java.util.Optional;
-import java.util.function.Predicate;
+import org.essentials4j.New;
+import org.essentials4j.To;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class FindLast<T> {
+public class GroupDSL<T> {
 
 	private final Stream<T> stream;
 
-	public FindLast(Stream<T> stream) {
+	public GroupDSL(Stream<T> stream) {
 		this.stream = stream;
 	}
 
-	public Optional<T> where(Predicate<? super T> predicate) {
-		return stream.filter(predicate)
-			.reduce((prev, next) -> next);
+	public <K> Map<K, List<T>> by(Function<T, K> transformation) {
+		return stream.collect(Collectors.groupingBy(transformation, New::map, To.list()));
 	}
 
 }

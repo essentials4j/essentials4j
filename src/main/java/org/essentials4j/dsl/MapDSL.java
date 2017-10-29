@@ -1,4 +1,4 @@
-package org.essentials4j.find;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,27 +20,36 @@ package org.essentials4j.find;
  * #L%
  */
 
+import org.essentials4j.To;
+
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.function.BiPredicate;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class FindFirstBi<K, V> {
+public class MapDSL<T> {
 
-	private final Map<K, V> items;
+	private final Stream<T> stream;
 
-	public FindFirstBi(Map<K, V> items) {
-		this.items = items;
+	public MapDSL(Stream<T> stream) {
+		this.stream = stream;
 	}
 
-	public Optional<Entry<K, V>> where(BiPredicate<K, V> predicate) {
-		return items.entrySet().stream()
-			.filter(e -> predicate.test(e.getKey(), e.getValue()))
-			.findFirst();
+	public <R> List<R> toList(Function<T, R> transformation) {
+		return stream.map(transformation).collect(To.list());
+	}
+
+	public <R> Set<R> toSet(Function<T, R> transformation) {
+		return stream.map(transformation).collect(To.set());
+	}
+
+	public <K, V> Map<K, V> toMap(Function<T, K> keyMapper, Function<T, V> valueMapper) {
+		return stream.collect(To.map(keyMapper, valueMapper));
 	}
 
 }

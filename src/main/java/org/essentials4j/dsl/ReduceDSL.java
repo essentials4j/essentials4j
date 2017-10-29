@@ -1,4 +1,4 @@
-package org.essentials4j.find;
+package org.essentials4j.dsl;
 
 /*
  * #%L
@@ -20,27 +20,28 @@ package org.essentials4j.find;
  * #L%
  */
 
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
 
 /**
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class FindLastBi<K, V> {
+public class ReduceDSL<T> {
 
-	private final Map<K, V> items;
+	private final Stream<T> stream;
 
-	public FindLastBi(Map<K, V> items) {
-		this.items = items;
+	public ReduceDSL(Stream<T> stream) {
+		this.stream = stream;
 	}
 
-	public Optional<Entry<K, V>> where(BiPredicate<K, V> predicate) {
-		return items.entrySet().stream()
-			.filter(e -> predicate.test(e.getKey(), e.getValue()))
-			.reduce((prev, next) -> next);
+	public Optional<T> by(BinaryOperator<T> accumulator) {
+		return stream.reduce(accumulator);
+	}
+
+	public T by(T identity, BinaryOperator<T> accumulator) {
+		return stream.reduce(identity, accumulator);
 	}
 
 }
