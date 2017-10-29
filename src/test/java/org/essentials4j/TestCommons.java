@@ -22,6 +22,8 @@ package org.essentials4j;
 
 import org.junit.Assert;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -34,7 +36,7 @@ public abstract class TestCommons {
 		try {
 			Assert.assertNotNull(value);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
@@ -43,7 +45,7 @@ public abstract class TestCommons {
 		try {
 			Assert.assertTrue(cond);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
@@ -52,7 +54,7 @@ public abstract class TestCommons {
 		try {
 			Assert.assertFalse(cond);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
@@ -61,7 +63,7 @@ public abstract class TestCommons {
 		try {
 			Assert.assertEquals(expected, actual);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
@@ -70,7 +72,7 @@ public abstract class TestCommons {
 		try {
 			Assert.assertEquals(expected, actual);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
@@ -79,15 +81,20 @@ public abstract class TestCommons {
 		try {
 			Assert.assertEquals(expected, actual);
 		} catch (AssertionError e) {
-			
+
 			throw e;
 		}
 	}
 
-	protected <K, V> void eq(Entry<K, V> entry, K key, V value) {
-		eq(entry.getKey(), key);
-		eq(entry.getValue(), value);
+	protected <K, V> void eq(Entry<K, V> actual, K expectedKey, V expectedValue) {
+		eq(actual.getKey(), expectedKey);
+		eq(actual.getValue(), expectedValue);
 	}
 
+	protected <K, V> void expectMap(Map<K, V> actual, Map<K, V> expected) {
+		notNull(actual);
+		isTrue(actual instanceof LinkedHashMap);
+		eq(actual, expected);
+	}
 
 }
