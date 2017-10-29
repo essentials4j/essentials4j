@@ -20,8 +20,6 @@ package org.essentials4j.find;
  * #L%
  */
 
-import org.essentials4j.utils.Lambdas;
-
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -41,7 +39,7 @@ public class FindLastBi<K, V> {
 
 	public Optional<Entry<K, V>> where(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
-			.filter(Lambdas.entryTest(predicate))
+			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.reduce((prev, next) -> next);
 	}
 

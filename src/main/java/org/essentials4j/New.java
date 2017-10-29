@@ -52,9 +52,7 @@ public final class New {
 	public static <T> Set<T> set(T... values) {
 		Set<T> set = set();
 
-		for (T val : values) {
-			set.add(val);
-		}
+		Collections.addAll(set, values);
 
 		return set;
 	}
@@ -78,9 +76,7 @@ public final class New {
 	public static <T> List<T> list(T... values) {
 		List<T> list = list();
 
-		for (T item : values) {
-			list.add(item);
-		}
+		Collections.addAll(list, values);
 
 		return list;
 	}
@@ -127,6 +123,7 @@ public final class New {
 
 	@SuppressWarnings("unchecked")
 	public static <K, V> Map<K, V> map(Object... keysAndValues) {
+
 		if (keysAndValues.length % 2 != 0) {
 			throw new IllegalArgumentException("Expected even number of arguments (key-value pairs)!");
 		}

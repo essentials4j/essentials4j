@@ -35,7 +35,7 @@ public final class Find {
 	}
 
 	public static <T> FindFirst<T> firstOf(Iterable<T> items) {
-		return new FindFirst<>(New.stream(items));
+		return firstOf(New.stream(items));
 	}
 
 	public static <K, V> FindFirstBi<K, V> firstOf(Map<K, V> items) {
@@ -47,7 +47,7 @@ public final class Find {
 	}
 
 	public static <T> FindAll<T> allOf(Iterable<T> items) {
-		return new FindAll<>(New.stream(items));
+		return allOf(New.stream(items));
 	}
 
 	public static <K, V> FindAllBi<K, V> allOf(Map<K, V> items) {
@@ -59,7 +59,7 @@ public final class Find {
 	}
 
 	public static <T> FindAny<T> anyOf(Iterable<T> items) {
-		return new FindAny<>(New.stream(items));
+		return anyOf(New.stream(items));
 	}
 
 	public static <K, V> FindAnyBi<K, V> anyOf(Map<K, V> items) {
@@ -71,7 +71,7 @@ public final class Find {
 	}
 
 	public static <T> FindLast<T> lastOf(Iterable<T> items) {
-		return new FindLast<>(New.stream(items));
+		return lastOf(New.stream(items));
 	}
 
 	public static <K, V> FindLastBi<K, V> lastOf(Map<K, V> items) {
@@ -83,7 +83,7 @@ public final class Find {
 	}
 
 	public static <T> FindIn<T> in(Iterable<T> items) {
-		return new FindIn<>(New.stream(items));
+		return in(New.stream(items));
 	}
 
 	public static <K, V> FindInBi<K, V> in(Map<K, V> items) {

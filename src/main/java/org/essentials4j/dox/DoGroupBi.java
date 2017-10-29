@@ -20,7 +20,8 @@ package org.essentials4j.dox;
  * #L%
  */
 
-import org.essentials4j.utils.StreamUtils;
+import org.essentials4j.New;
+import org.essentials4j.To;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,11 +43,12 @@ public class DoGroupBi<K, V> {
 	}
 
 	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> transformation) {
+		Collector<Entry<K, V>, ?, Map<K, V>> downstream = To.map();
+
 		Function<Entry<K, V>, R> classifier = e -> transformation.apply(e.getKey(), e.getValue());
-		Collector<Entry<K, V>, ?, Map<K, V>> downstream = StreamUtils.toLinkedMap();
 
 		return items.entrySet().stream()
-			.collect(Collectors.groupingBy(classifier, downstream));
+			.collect(Collectors.groupingBy(classifier, New::map, downstream));
 	}
 
 }

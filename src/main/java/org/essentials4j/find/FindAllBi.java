@@ -20,8 +20,7 @@ package org.essentials4j.find;
  * #L%
  */
 
-import org.essentials4j.utils.Lambdas;
-import org.essentials4j.utils.StreamUtils;
+import org.essentials4j.To;
 
 import java.util.Map;
 import java.util.function.BiPredicate;
@@ -40,8 +39,8 @@ public class FindAllBi<K, V> {
 
 	public Map<K, V> where(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
-			.filter(Lambdas.entryTest(predicate))
-			.collect(StreamUtils.toLinkedMap());
+			.filter(e -> predicate.test(e.getKey(), e.getValue()))
+			.collect(To.map());
 	}
 
 }

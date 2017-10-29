@@ -20,13 +20,12 @@ package org.essentials4j.dox;
  * #L%
  */
 
-import org.essentials4j.utils.StreamUtils;
+import org.essentials4j.To;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -42,15 +41,15 @@ public class DoMap<T> {
 	}
 
 	public <R> List<R> toList(Function<T, R> transformation) {
-		return stream.map(transformation).collect(Collectors.toList());
+		return stream.map(transformation).collect(To.list());
 	}
 
 	public <R> Set<R> toSet(Function<T, R> transformation) {
-		return stream.map(transformation).collect(Collectors.toSet());
+		return stream.map(transformation).collect(To.set());
 	}
 
 	public <K, V> Map<K, V> toMap(Function<T, K> keyMapper, Function<T, V> valueMapper) {
-		return stream.collect(StreamUtils.toLinkedMap(keyMapper, valueMapper));
+		return stream.collect(To.map(keyMapper, valueMapper));
 	}
 
 }

@@ -20,7 +20,6 @@ package org.essentials4j.find;
  * #L%
  */
 
-import org.essentials4j.utils.Lambdas;
 
 import java.util.Map;
 import java.util.function.BiPredicate;
@@ -38,7 +37,8 @@ public class FindInBi<K, V> {
 	}
 
 	public boolean exists(BiPredicate<K, V> predicate) {
-		return items.entrySet().stream().anyMatch(Lambdas.entryTest(predicate));
+		return items.entrySet().stream()
+			.anyMatch(e -> predicate.test(e.getKey(), e.getValue()));
 	}
 
 }

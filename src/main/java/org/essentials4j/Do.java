@@ -35,14 +35,12 @@ public final class Do {
 	private Do() {
 	}
 
-	@SafeVarargs
-	@SuppressWarnings("unchecked")
-	public static <T> DoMap<T> map(T... items) {
-		return new DoMap<>(Stream.of(items));
+	public static <T> DoMap<T> map(Iterable<T> items) {
+		return map(New.stream(items));
 	}
 
-	public static <T> DoMap<T> map(Iterable<T> items) {
-		return new DoMap<>(New.stream(items));
+	public static <T> DoMap<T> map(Stream<T> stream) {
+		return new DoMap<>(stream);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -51,7 +49,11 @@ public final class Do {
 	}
 
 	public static <T> DoGroup<T> group(Iterable<T> items) {
-		return new DoGroup<>(New.stream(items));
+		return group(New.stream(items));
+	}
+
+	public static <T> DoGroup<T> group(Stream<T> stream) {
+		return new DoGroup<>(stream);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -60,7 +62,11 @@ public final class Do {
 	}
 
 	public static <T> DoReduce<T> reduce(Iterable<T> items) {
-		return new DoReduce<>(New.stream(items));
+		return reduce(New.stream(items));
+	}
+
+	public static <T> DoReduce<T> reduce(Stream<T> stream) {
+		return new DoReduce<>(stream);
 	}
 
 }

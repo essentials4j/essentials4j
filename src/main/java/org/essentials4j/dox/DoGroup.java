@@ -20,6 +20,9 @@ package org.essentials4j.dox;
  * #L%
  */
 
+import org.essentials4j.New;
+import org.essentials4j.To;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -38,8 +41,8 @@ public class DoGroup<T> {
 		this.stream = stream;
 	}
 
-	public <K, V> Map<K, List<T>> by(Function<T, K> transformation) {
-		return stream.collect(Collectors.groupingBy(transformation));
+	public <K> Map<K, List<T>> by(Function<T, K> transformation) {
+		return stream.collect(Collectors.groupingBy(transformation, New::map, To.list()));
 	}
 
 }

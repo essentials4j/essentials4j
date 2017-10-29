@@ -20,14 +20,12 @@ package org.essentials4j.dox;
  * #L%
  */
 
-import org.essentials4j.utils.Lambdas;
-import org.essentials4j.utils.StreamUtils;
+import org.essentials4j.To;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 /**
  * @author Nikolche Mihajlovski
@@ -44,15 +42,22 @@ public class DoMapBi<K, V> {
 	public <K2, V2> Map<K2, V2> toMap(BiFunction<K, V, ? extends K2> keyTransformation,
 	                                  BiFunction<K, V, ? extends V2> valueTransformation) {
 		return items.entrySet().stream()
-			.collect(StreamUtils.toLinkedMap(e -> Lambdas.apply(e, keyTransformation), e -> Lambdas.apply(e, valueTransformation)));
+			.collect(To.map(
+				e -> keyTransformation.apply(e.getKey(), e.getValue()),
+				e -> valueTransformation.apply(e.getKey(), e.getValue())
+			));
 	}
 
 	public <R> List<R> toList(BiFunction<K, V, R> transformation) {
-		return items.entrySet().stream().map(e -> Lambdas.apply(e, transformation)).collect(Collectors.toList());
+		return items.entrySet().stream()
+			.map(e -> transformation.apply(e.getKey(), e.getValue()))
+			.collect(To.list());
 	}
 
 	public <R> Set<R> toSet(BiFunction<K, V, R> transformation) {
-		return items.entrySet().stream().map(e -> Lambdas.apply(e, transformation)).collect(Collectors.toSet());
+		return items.entrySet().stream()
+			.map(e -> transformation.apply(e.getKey(), e.getValue()))
+			.collect(To.set());
 	}
 
 }

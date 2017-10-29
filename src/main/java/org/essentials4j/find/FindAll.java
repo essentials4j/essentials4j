@@ -20,9 +20,10 @@ package org.essentials4j.find;
  * #L%
  */
 
+import org.essentials4j.To;
+
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -38,7 +39,7 @@ public class FindAll<T> {
 	}
 
 	public List<T> where(Predicate<? super T> predicate) {
-		return stream.filter(predicate).collect(Collectors.toList());
+		return stream.filter(predicate).collect(To.list());
 	}
 
 }
