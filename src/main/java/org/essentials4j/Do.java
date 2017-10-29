@@ -2,8 +2,8 @@ package org.essentials4j;
 
 import org.essentials4j.dox.*;
 
-import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /*
@@ -36,36 +36,54 @@ public final class Do {
 	}
 
 	public static <T> DoMap<T> map(Iterable<T> items) {
-		return map(New.stream(items));
-	}
+		Objects.requireNonNull(items);
 
-	public static <T> DoMap<T> map(Stream<T> stream) {
-		return new DoMap<>(stream);
+		return map(New.stream(items));
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <K, V> DoMapBi<K, V> map(Map<K, V> items) {
-		return new DoMapBi<K, V>(items != null ? items : Collections.EMPTY_MAP);
+		Objects.requireNonNull(items);
+
+		return new DoMapBi<>(items);
 	}
+
+	public static <T> DoMap<T> map(Stream<T> stream) {
+		Objects.requireNonNull(stream);
+
+		return new DoMap<>(stream);
+	}
+
 
 	public static <T> DoGroup<T> group(Iterable<T> items) {
-		return group(New.stream(items));
-	}
+		Objects.requireNonNull(items);
 
-	public static <T> DoGroup<T> group(Stream<T> stream) {
-		return new DoGroup<>(stream);
+		return group(New.stream(items));
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <K, V> DoGroupBi<K, V> group(Map<K, V> items) {
-		return new DoGroupBi<K, V>(items != null ? items : Collections.EMPTY_MAP);
+		Objects.requireNonNull(items);
+
+		return new DoGroupBi<>(items);
 	}
 
+	public static <T> DoGroup<T> group(Stream<T> stream) {
+		Objects.requireNonNull(stream);
+
+		return new DoGroup<>(stream);
+	}
+
+
 	public static <T> DoReduce<T> reduce(Iterable<T> items) {
+		Objects.requireNonNull(items);
+
 		return reduce(New.stream(items));
 	}
 
 	public static <T> DoReduce<T> reduce(Stream<T> stream) {
+		Objects.requireNonNull(stream);
+
 		return new DoReduce<>(stream);
 	}
 

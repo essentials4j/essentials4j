@@ -3,6 +3,7 @@ package org.essentials4j;
 import org.essentials4j.find.*;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /*
@@ -35,62 +36,77 @@ public final class Find {
 	}
 
 	public static <T> FindFirst<T> firstOf(Iterable<T> items) {
+		Objects.requireNonNull(items);
 		return firstOf(New.stream(items));
 	}
 
 	public static <K, V> FindFirstBi<K, V> firstOf(Map<K, V> items) {
+		Objects.requireNonNull(items);
 		return new FindFirstBi<>(items);
 	}
 
 	public static <T> FindFirst<T> firstOf(Stream<T> stream) {
+		Objects.requireNonNull(stream);
 		return new FindFirst<>(stream);
 	}
 
 	public static <T> FindAll<T> allOf(Iterable<T> items) {
+		Objects.requireNonNull(items);
 		return allOf(New.stream(items));
 	}
 
 	public static <K, V> FindAllBi<K, V> allOf(Map<K, V> items) {
+		Objects.requireNonNull(items);
 		return new FindAllBi<>(items);
 	}
 
 	public static <T> FindAll<T> allOf(Stream<T> stream) {
+		Objects.requireNonNull(stream);
 		return new FindAll<>(stream);
 	}
 
 	public static <T> FindAny<T> anyOf(Iterable<T> items) {
+		Objects.requireNonNull(items);
 		return anyOf(New.stream(items));
 	}
 
 	public static <K, V> FindAnyBi<K, V> anyOf(Map<K, V> items) {
+		Objects.requireNonNull(items);
 		return new FindAnyBi<>(items);
 	}
 
 	public static <T> FindAny<T> anyOf(Stream<T> stream) {
+		Objects.requireNonNull(stream);
 		return new FindAny<>(stream);
 	}
 
 	public static <T> FindLast<T> lastOf(Iterable<T> items) {
+		Objects.requireNonNull(items);
 		return lastOf(New.stream(items));
 	}
 
 	public static <K, V> FindLastBi<K, V> lastOf(Map<K, V> items) {
+		Objects.requireNonNull(items);
 		return new FindLastBi<>(items);
 	}
 
 	public static <T> FindLast<T> lastOf(Stream<T> stream) {
+		Objects.requireNonNull(stream);
 		return new FindLast<>(stream);
 	}
 
 	public static <T> FindIn<T> in(Iterable<T> items) {
+		Objects.requireNonNull(items);
 		return in(New.stream(items));
 	}
 
 	public static <K, V> FindInBi<K, V> in(Map<K, V> items) {
+		Objects.requireNonNull(items);
 		return new FindInBi<>(items);
 	}
 
 	public static <T> FindIn<T> in(Stream<T> stream) {
+		Objects.requireNonNull(stream);
 		return new FindIn<>(stream);
 	}
 

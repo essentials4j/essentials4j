@@ -38,6 +38,7 @@ public final class New {
 	}
 
 	public static <T> Set<T> set(Iterable<? extends T> values) {
+		Objects.requireNonNull(values);
 		Set<T> set = set();
 
 		for (T val : values) {
@@ -50,6 +51,7 @@ public final class New {
 	@SafeVarargs
 	@SuppressWarnings({"varargs", "unchecked"})
 	public static <T> Set<T> set(T... values) {
+		Objects.requireNonNull(values);
 		Set<T> set = set();
 
 		Collections.addAll(set, values);
@@ -62,6 +64,7 @@ public final class New {
 	}
 
 	public static <T> List<T> list(Iterable<? extends T> values) {
+		Objects.requireNonNull(values);
 		List<T> list = list();
 
 		for (T item : values) {
@@ -74,6 +77,7 @@ public final class New {
 	@SafeVarargs
 	@SuppressWarnings({"varargs", "unchecked"})
 	public static <T> List<T> list(T... values) {
+		Objects.requireNonNull(values);
 		List<T> list = list();
 
 		Collections.addAll(list, values);
@@ -86,8 +90,11 @@ public final class New {
 	}
 
 	public static <K, V> Map<K, V> map(Map<? extends K, ? extends V> src) {
+		Objects.requireNonNull(src);
 		Map<K, V> map = map();
+
 		map.putAll(src);
+
 		return map;
 	}
 
@@ -123,6 +130,7 @@ public final class New {
 
 	@SuppressWarnings("unchecked")
 	public static <K, V> Map<K, V> map(Object... keysAndValues) {
+		Objects.requireNonNull(keysAndValues);
 
 		if (keysAndValues.length % 2 != 0) {
 			throw new IllegalArgumentException("Expected even number of arguments (key-value pairs)!");
@@ -139,6 +147,7 @@ public final class New {
 
 	public static <T> Stream<T> stream(Iterable<T> items) {
 		Objects.requireNonNull(items);
+
 		return StreamSupport.stream(items.spliterator(), false);
 	}
 
