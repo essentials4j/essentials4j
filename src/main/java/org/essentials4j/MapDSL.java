@@ -20,8 +20,6 @@ package org.essentials4j;
  * #L%
  */
 
-import org.essentials4j.To;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +34,7 @@ public class MapDSL<T> {
 
 	private final Stream<T> stream;
 
-	public MapDSL(Stream<T> stream) {
+	MapDSL(Stream<T> stream) {
 		this.stream = stream;
 	}
 

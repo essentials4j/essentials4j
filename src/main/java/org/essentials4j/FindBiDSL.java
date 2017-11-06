@@ -21,8 +21,6 @@ package org.essentials4j;
  */
 
 
-import org.essentials4j.To;
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiPredicate;
@@ -35,7 +33,7 @@ public class FindBiDSL<K, V> {
 
 	private final Map<K, V> items;
 
-	public FindBiDSL(Map<K, V> items) {
+	FindBiDSL(Map<K, V> items) {
 		this.items = items;
 	}
 

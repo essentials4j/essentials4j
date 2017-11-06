@@ -20,8 +20,6 @@ package org.essentials4j;
  * #L%
  */
 
-import org.essentials4j.To;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -35,7 +33,7 @@ public class FindDSL<T> {
 
 	private final Stream<T> stream;
 
-	public FindDSL(Stream<T> stream) {
+	FindDSL(Stream<T> stream) {
 		this.stream = stream;
 	}
 

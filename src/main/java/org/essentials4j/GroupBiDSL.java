@@ -20,9 +20,6 @@ package org.essentials4j;
  * #L%
  */
 
-import org.essentials4j.New;
-import org.essentials4j.To;
-
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -35,7 +32,7 @@ public class GroupBiDSL<K, V> {
 
 	private final Map<K, V> items;
 
-	public GroupBiDSL(Map<K, V> items) {
+	GroupBiDSL(Map<K, V> items) {
 		this.items = items;
 	}
 

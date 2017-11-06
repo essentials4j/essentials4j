@@ -20,8 +20,6 @@ package org.essentials4j;
  * #L%
  */
 
-import org.essentials4j.To;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,7 +33,7 @@ public class MapBiDSL<K, V> {
 
 	private final Map<K, V> items;
 
-	public MapBiDSL(Map<K, V> items) {
+	MapBiDSL(Map<K, V> items) {
 		this.items = items;
 	}
 

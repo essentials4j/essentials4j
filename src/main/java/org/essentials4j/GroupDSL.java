@@ -20,9 +20,6 @@ package org.essentials4j;
  * #L%
  */
 
-import org.essentials4j.New;
-import org.essentials4j.To;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -37,7 +34,7 @@ public class GroupDSL<T> {
 
 	private final Stream<T> stream;
 
-	public GroupDSL(Stream<T> stream) {
+	GroupDSL(Stream<T> stream) {
 		this.stream = stream;
 	}
 
