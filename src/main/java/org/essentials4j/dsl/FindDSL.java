@@ -39,25 +39,63 @@ public class FindDSL<T> {
 		this.stream = stream;
 	}
 
+	/**
+	 * Searches through the pre-specified items for the existence of any element that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function
+	 * @return {@code true} if any matching element has been found, or {@code false} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public boolean exists(Predicate<? super T> predicate) {
 		return stream.anyMatch(predicate);
 	}
 
+	/**
+	 * Searches through the pre-specified items for the first element that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function
+	 * @return {@code Optional} wrapping the first matching element if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<T> first(Predicate<? super T> predicate) {
-		return stream.filter(predicate).findFirst();
+		return stream.filter(predicate)
+			.findFirst();
 	}
 
+	/**
+	 * Searches through the pre-specified items for the last element that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function
+	 * @return {@code Optional} wrapping the last matching element if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<T> last(Predicate<? super T> predicate) {
 		return stream.filter(predicate)
 			.reduce((prev, next) -> next);
 	}
 
+	/**
+	 * Searches through the pre-specified items for any element that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function
+	 * @return {@code Optional} wrapping any matching element if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<T> any(Predicate<? super T> predicate) {
-		return stream.filter(predicate).findAny();
+		return stream.filter(predicate)
+			.findAny();
 	}
 
+	/**
+	 * Searches through the pre-specified items for all elements that satisfy the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function
+	 * @return a new {@code List} consisting of all matching elements that have been found, if any
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public List<T> all(Predicate<? super T> predicate) {
-		return stream.filter(predicate).collect(To.list());
+		return stream.filter(predicate)
+			.collect(To.list());
 	}
 
 }

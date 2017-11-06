@@ -39,29 +39,64 @@ public class FindBiDSL<K, V> {
 		this.items = items;
 	}
 
+	/**
+	 * Searches through the pre-specified items ({@code Map} entries) for the existence of any entry that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function, to be applied on {@code (key, value)} entries
+	 * @return {@code true} if any matching entry has been found, or {@code false} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public boolean exists(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.anyMatch(e -> predicate.test(e.getKey(), e.getValue()));
 	}
 
+	/**
+	 * Searches through the pre-specified items ({@code Map} entries) for the first entry that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function, to be applied on {@code (key, value)} entries
+	 * @return {@code Optional} wrapping the first matching entry if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<Map.Entry<K, V>> first(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.findFirst();
 	}
 
+	/**
+	 * Searches through the pre-specified items ({@code Map} entries) for the last entry that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function, to be applied on {@code (key, value)} entries
+	 * @return {@code Optional} wrapping the last matching entry if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<Map.Entry<K, V>> last(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.reduce((prev, next) -> next);
 	}
 
+	/**
+	 * Searches through the pre-specified items ({@code Map} entries) for any entry that satisfies the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function, to be applied on {@code (key, value)} entries
+	 * @return {@code Optional} wrapping any matching entry if it has been found, or an empty {@code Optional} otherwise
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Optional<Map.Entry<K, V>> any(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.findAny();
 	}
 
+	/**
+	 * Searches through the pre-specified items ({@code Map} entries) for all entries that satisfy the specified criteria (predicate).
+	 *
+	 * @param predicate the search criteria specified as a predicate function, to be applied on {@code (key, value)} entries
+	 * @return a new {@code Map} consisting of all matching entries that have been found, if any
+	 * @throws NullPointerException if {@code predicate} is {@code null}
+	 */
 	public Map<K, V> all(BiPredicate<K, V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))

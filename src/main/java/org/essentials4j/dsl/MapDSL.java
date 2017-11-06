@@ -40,16 +40,44 @@ public class MapDSL<T> {
 		this.stream = stream;
 	}
 
+	/**
+	 * Maps (transforms) the pre-specified items by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code List}.
+	 *
+	 * @param transformation the transformation function used to derive a resulting element from each item
+	 * @return a new {@code List} consisting of the derived elements
+	 * @throws NullPointerException if {@code transformation} is {@code null}
+	 */
 	public <R> List<R> toList(Function<T, R> transformation) {
 		return stream.map(transformation).collect(To.list());
 	}
 
+	/**
+	 * Maps (transforms) the pre-specified items by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code Set}.
+	 *
+	 * @param transformation the transformation function used to derive a resulting element from each item
+	 * @return a new {@code Set} consisting of the derived elements
+	 * @throws NullPointerException if {@code transformation} is {@code null}
+	 */
 	public <R> Set<R> toSet(Function<T, R> transformation) {
 		return stream.map(transformation).collect(To.set());
 	}
 
-	public <K, V> Map<K, V> toMap(Function<T, K> keyMapper, Function<T, V> valueMapper) {
-		return stream.collect(To.map(keyMapper, valueMapper));
+	/**
+	 * Maps (transforms) the pre-specified items by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code Map}.
+	 *
+	 * @param keyTransformation   the transformation function used to derive a resulting entry key from each item
+	 * @param valueTransformation the transformation function used to derive a resulting entry value from each item
+	 * @return a new {@code Map} consisting of the derived {@code (key, value)} entries
+	 * @throws NullPointerException if {@code keyTransformation} is {@code null} or {@code valueTransformation} is {@code null}
+	 */
+	public <K, V> Map<K, V> toMap(Function<T, K> keyTransformation, Function<T, V> valueTransformation) {
+		return stream.collect(To.map(keyTransformation, valueTransformation));
 	}
 
 }

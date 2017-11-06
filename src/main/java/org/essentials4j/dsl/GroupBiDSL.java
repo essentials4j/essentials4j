@@ -24,10 +24,7 @@ import org.essentials4j.New;
 import org.essentials4j.To;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -42,13 +39,22 @@ public class GroupBiDSL<K, V> {
 		this.items = items;
 	}
 
-	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> transformation) {
-		Collector<Entry<K, V>, ?, Map<K, V>> downstream = To.map();
-
-		Function<Entry<K, V>, R> classifier = e -> transformation.apply(e.getKey(), e.getValue());
-
+	/**
+	 * Groups the pre-specified items ({@code Map} entries) according to the specified classification function, which maps each entry to a classification key.
+	 * <p>
+	 * The resulting groups of entries are stored into a new {@code Map} with the following structure:
+	 * <p>
+	 * - keys: the distinct set of classification keys,
+	 * <p>
+	 * - values: for each classification key, a {@code Map} of all entries that were mapped to that key.
+	 *
+	 * @param classifier the classification function used to group the items
+	 * @return a new {@code Map} consisting of the grouped items
+	 * @throws NullPointerException if {@code classifier} is {@code null}
+	 */
+	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> classifier) {
 		return items.entrySet().stream()
-			.collect(Collectors.groupingBy(classifier, New::map, downstream));
+			.collect(Collectors.groupingBy(e -> classifier.apply(e.getKey(), e.getValue()), New::map, To.map()));
 	}
 
 }

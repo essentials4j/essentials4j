@@ -37,18 +37,45 @@ public final class Do {
 
 	/* findIn */
 
+	/**
+	 * Searches through the specified items for elements that satisfy the criteria that will be specified.
+	 * <p>
+	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 *
+	 * @param items the items to search through
+	 * @return DSL helper used to specify search criteria and execute the search through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> FindDSL<T> findIn(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return findIn(New.stream(items));
 	}
 
+	/**
+	 * Searches through the specified items for {@code Map} entries that satisfy the criteria that will be specified.
+	 * <p>
+	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 *
+	 * @param items the items to search through
+	 * @return DSL helper used to specify search criteria and execute the search through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <K, V> FindBiDSL<K, V> findIn(Map<K, V> items) {
 		Objects.requireNonNull(items);
 
 		return new FindBiDSL<>(items);
 	}
 
+	/**
+	 * Searches through the specified items for elements that satisfy the criteria that will be specified.
+	 * <p>
+	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 *
+	 * @param items the items to search through
+	 * @return DSL helper used to specify search criteria and execute the search through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> FindDSL<T> findIn(Stream<T> items) {
 		Objects.requireNonNull(items);
 
@@ -57,19 +84,45 @@ public final class Do {
 
 	/* map */
 
+	/**
+	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
+	 * <p>
+	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 *
+	 * @param items the items to map (transform)
+	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> MapDSL<T> map(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return map(New.stream(items));
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
+	 * <p>
+	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 *
+	 * @param items the items to map (transform)
+	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <K, V> MapBiDSL<K, V> map(Map<K, V> items) {
 		Objects.requireNonNull(items);
 
 		return new MapBiDSL<>(items);
 	}
 
+	/**
+	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
+	 * <p>
+	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 *
+	 * @param items the items to map (transform)
+	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> MapDSL<T> map(Stream<T> items) {
 		Objects.requireNonNull(items);
 
@@ -78,19 +131,45 @@ public final class Do {
 
 	/* group */
 
+	/**
+	 * Groups the specified items according to a classification function that will be specified.
+	 * <p>
+	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 *
+	 * @param items the items to group
+	 * @return DSL helper used to specify classification function and execute the grouping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> GroupDSL<T> group(Iterable<T> items) {
 		Objects.requireNonNull(items);
 
 		return group(New.stream(items));
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * Groups the specified items according to a classification function that will be specified.
+	 * <p>
+	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 *
+	 * @param items the items to group
+	 * @return DSL helper used to specify classification function and execute the grouping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <K, V> GroupBiDSL<K, V> group(Map<K, V> items) {
 		Objects.requireNonNull(items);
 
 		return new GroupBiDSL<>(items);
 	}
 
+	/**
+	 * Groups the specified items according to a classification function that will be specified.
+	 * <p>
+	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 *
+	 * @param items the items to group
+	 * @return DSL helper used to specify classification function and execute the grouping through method chain call
+	 * @throws NullPointerException if {@code items} is {@code null}
+	 */
 	public static <T> GroupDSL<T> group(Stream<T> items) {
 		Objects.requireNonNull(items);
 

@@ -39,6 +39,46 @@ public class MapBiDSL<K, V> {
 		this.items = items;
 	}
 
+	/**
+	 * Maps (transforms) the pre-specified items ({@code Map} entries) by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code List}.
+	 *
+	 * @param transformation the transformation function used to derive a resulting element from each {@code (key, value)} entry
+	 * @return a new {@code List} consisting of the derived elements
+	 * @throws NullPointerException if {@code transformation} is {@code null}
+	 */
+	public <R> List<R> toList(BiFunction<K, V, R> transformation) {
+		return items.entrySet().stream()
+			.map(e -> transformation.apply(e.getKey(), e.getValue()))
+			.collect(To.list());
+	}
+
+	/**
+	 * Maps (transforms) the pre-specified items ({@code Map} entries) by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code Set}.
+	 *
+	 * @param transformation the transformation function used to derive a resulting element from each {@code (key, value)} entry
+	 * @return a new {@code Set} consisting of the derived elements
+	 * @throws NullPointerException if {@code transformation} is {@code null}
+	 */
+	public <R> Set<R> toSet(BiFunction<K, V, R> transformation) {
+		return items.entrySet().stream()
+			.map(e -> transformation.apply(e.getKey(), e.getValue()))
+			.collect(To.set());
+	}
+
+	/**
+	 * Maps (transforms) the pre-specified items ({@code Map} entries) by applying the specified transformation function.
+	 * <p>
+	 * The resulting elements derived from this transformation are stored into a new {@code Map}.
+	 *
+	 * @param keyTransformation   the transformation function used to derive a resulting entry key from each {@code (key, value)} entry
+	 * @param valueTransformation the transformation function used to derive a resulting entry value from each {@code (key, value)} entry
+	 * @return a new {@code Map} consisting of the derived {@code (key, value)} entries
+	 * @throws NullPointerException if {@code keyTransformation} is {@code null} or {@code valueTransformation} is {@code null}
+	 */
 	public <K2, V2> Map<K2, V2> toMap(BiFunction<K, V, ? extends K2> keyTransformation,
 	                                  BiFunction<K, V, ? extends V2> valueTransformation) {
 		return items.entrySet().stream()
@@ -46,18 +86,6 @@ public class MapBiDSL<K, V> {
 				e -> keyTransformation.apply(e.getKey(), e.getValue()),
 				e -> valueTransformation.apply(e.getKey(), e.getValue())
 			));
-	}
-
-	public <R> List<R> toList(BiFunction<K, V, R> transformation) {
-		return items.entrySet().stream()
-			.map(e -> transformation.apply(e.getKey(), e.getValue()))
-			.collect(To.list());
-	}
-
-	public <R> Set<R> toSet(BiFunction<K, V, R> transformation) {
-		return items.entrySet().stream()
-			.map(e -> transformation.apply(e.getKey(), e.getValue()))
-			.collect(To.set());
 	}
 
 }
