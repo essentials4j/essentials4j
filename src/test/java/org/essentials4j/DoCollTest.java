@@ -72,18 +72,6 @@ public class DoCollTest extends TestCommons {
 	}
 
 	@Test
-	public void reduceListWithOptional() {
-		String joined = Do.reduce(abc()).by((a, b) -> a + ":" + b).orElse("");
-		eq(joined, "a:bbbbb:cc");
-	}
-
-	@Test
-	public void reduceListWithIdentity() {
-		String joined2 = Do.reduce(abc()).by("@", (a, b) -> a + ":" + b);
-		eq(joined2, "@:a:bbbbb:cc");
-	}
-
-	@Test
 	public void listToSet() {
 		Set<Integer> lengths3 = Do.map(abc()).toSet(String::length);
 		eq(lengths3, New.set(1, 2, 5));

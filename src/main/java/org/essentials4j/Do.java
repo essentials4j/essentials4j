@@ -97,18 +97,4 @@ public final class Do {
 		return new GroupDSL<>(items);
 	}
 
-	/* reduce */
-
-	public static <T> ReduceDSL<T> reduce(Iterable<T> items) {
-		Objects.requireNonNull(items);
-
-		return reduce(New.stream(items));
-	}
-
-	public static <T> ReduceDSL<T> reduce(Stream<T> items) {
-		Objects.requireNonNull(items);
-
-		return new ReduceDSL<>(items);
-	}
-
 }
