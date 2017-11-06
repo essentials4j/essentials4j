@@ -1,7 +1,5 @@
 package org.essentials4j;
 
-import org.essentials4j.dsl.*;
-
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;

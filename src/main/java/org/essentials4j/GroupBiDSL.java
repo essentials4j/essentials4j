@@ -1,4 +1,4 @@
-package org.essentials4j.dsl;
+package org.essentials4j;
 
 /*
  * #%L
@@ -23,39 +23,38 @@ package org.essentials4j.dsl;
 import org.essentials4j.New;
 import org.essentials4j.To;
 
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
-public class GroupDSL<T> {
+public class GroupBiDSL<K, V> {
 
-	private final Stream<T> stream;
+	private final Map<K, V> items;
 
-	public GroupDSL(Stream<T> stream) {
-		this.stream = stream;
+	public GroupBiDSL(Map<K, V> items) {
+		this.items = items;
 	}
 
 	/**
-	 * Groups the pre-specified items according to the specified classification function, which maps each element to a classification key.
+	 * Groups the pre-specified items ({@code Map} entries) according to the specified classification function, which maps each entry to a classification key.
 	 * <p>
-	 * The resulting groups of elements are stored into a new {@code Map} with the following structure:
+	 * The resulting groups of entries are stored into a new {@code Map} with the following structure:
 	 * <p>
 	 * - keys: the distinct set of classification keys,
 	 * <p>
-	 * - values: for each classification key, a {@code List} of all elements that were mapped to that key.
+	 * - values: for each classification key, a {@code Map} of all entries that were mapped to that key.
 	 *
 	 * @param classifier the classification function used to group the items
 	 * @return a new {@code Map} consisting of the grouped items
 	 * @throws NullPointerException if {@code classifier} is {@code null}
 	 */
-	public <K> Map<K, List<T>> by(Function<T, K> classifier) {
-		return stream.collect(Collectors.groupingBy(classifier, New::map, To.list()));
+	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> classifier) {
+		return items.entrySet().stream()
+			.collect(Collectors.groupingBy(e -> classifier.apply(e.getKey(), e.getValue()), New::map, To.map()));
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.essentials4j.dsl;
+package org.essentials4j;
 
 /*
  * #%L
