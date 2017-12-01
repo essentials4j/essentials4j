@@ -26,6 +26,8 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 /**
+ * DSL helper used to specify search criteria and execute the search through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
@@ -44,7 +46,7 @@ public class FindBiDSL<K, V> {
 	 * @return {@code true} if any matching entry has been found, or {@code false} otherwise
 	 * @throws NullPointerException if {@code predicate} is {@code null}
 	 */
-	public boolean exists(BiPredicate<K, V> predicate) {
+	public boolean exists(BiPredicate<? super K, ? super V> predicate) {
 		return items.entrySet().stream()
 			.anyMatch(e -> predicate.test(e.getKey(), e.getValue()));
 	}
@@ -56,7 +58,7 @@ public class FindBiDSL<K, V> {
 	 * @return {@code Optional} wrapping the first matching entry if it has been found, or an empty {@code Optional} otherwise
 	 * @throws NullPointerException if {@code predicate} is {@code null}
 	 */
-	public Optional<Map.Entry<K, V>> first(BiPredicate<K, V> predicate) {
+	public Optional<Map.Entry<K, V>> first(BiPredicate<? super K, ? super V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.findFirst();
@@ -69,7 +71,7 @@ public class FindBiDSL<K, V> {
 	 * @return {@code Optional} wrapping the last matching entry if it has been found, or an empty {@code Optional} otherwise
 	 * @throws NullPointerException if {@code predicate} is {@code null}
 	 */
-	public Optional<Map.Entry<K, V>> last(BiPredicate<K, V> predicate) {
+	public Optional<Map.Entry<K, V>> last(BiPredicate<? super K, ? super V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.reduce((prev, next) -> next);
@@ -82,7 +84,7 @@ public class FindBiDSL<K, V> {
 	 * @return {@code Optional} wrapping any matching entry if it has been found, or an empty {@code Optional} otherwise
 	 * @throws NullPointerException if {@code predicate} is {@code null}
 	 */
-	public Optional<Map.Entry<K, V>> any(BiPredicate<K, V> predicate) {
+	public Optional<Map.Entry<K, V>> any(BiPredicate<? super K, ? super V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.findAny();
@@ -95,7 +97,7 @@ public class FindBiDSL<K, V> {
 	 * @return a new {@code Map} consisting of all matching entries that have been found, if any
 	 * @throws NullPointerException if {@code predicate} is {@code null}
 	 */
-	public Map<K, V> all(BiPredicate<K, V> predicate) {
+	public Map<K, V> all(BiPredicate<? super K, ? super V> predicate) {
 		return items.entrySet().stream()
 			.filter(e -> predicate.test(e.getKey(), e.getValue()))
 			.collect(To.map());

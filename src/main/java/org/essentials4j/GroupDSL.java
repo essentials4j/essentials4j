@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * DSL helper used to specify classification function and execute the grouping through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
@@ -51,7 +53,7 @@ public class GroupDSL<T> {
 	 * @return a new {@code Map} consisting of the grouped items
 	 * @throws NullPointerException if {@code classifier} is {@code null}
 	 */
-	public <K> Map<K, List<T>> by(Function<T, K> classifier) {
+	public <K> Map<K, List<T>> by(Function<? super T, ? extends K> classifier) {
 		return stream.collect(Collectors.groupingBy(classifier, New::map, To.list()));
 	}
 

@@ -26,6 +26,8 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
+ * DSL helper used to specify search criteria and execute the search through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */

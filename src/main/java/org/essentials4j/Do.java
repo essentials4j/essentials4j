@@ -30,6 +30,9 @@ import java.util.stream.Stream;
  */
 public final class Do {
 
+	/**
+	 * Static utilities. Do not instantiate.
+	 */
 	private Do() {
 	}
 
@@ -39,6 +42,14 @@ public final class Do {
 	 * Searches through the specified items for elements that satisfy the criteria that will be specified.
 	 * <p>
 	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.findIn(items).exists(item -> criteria)
+	 * Do.findIn(items).first(item -> criteria)
+	 * Do.findIn(items).last(item -> criteria)
+	 * Do.findIn(items).any(item -> criteria)
+	 * Do.findIn(items).all(item -> criteria)
+	 * </code></pre>
 	 *
 	 * @param items the items to search through
 	 * @return DSL helper used to specify search criteria and execute the search through method chain call
@@ -54,6 +65,14 @@ public final class Do {
 	 * Searches through the specified items for {@code Map} entries that satisfy the criteria that will be specified.
 	 * <p>
 	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.findIn(items).exists((key, value) -> criteria)
+	 * Do.findIn(items).first((key, value) -> criteria)
+	 * Do.findIn(items).last((key, value) -> criteria)
+	 * Do.findIn(items).any((key, value) -> criteria)
+	 * Do.findIn(items).all((key, value) -> criteria)
+	 * </code></pre>
 	 *
 	 * @param items the items to search through
 	 * @return DSL helper used to specify search criteria and execute the search through method chain call
@@ -69,6 +88,14 @@ public final class Do {
 	 * Searches through the specified items for elements that satisfy the criteria that will be specified.
 	 * <p>
 	 * The search will be executed as soon as the search criteria is specified as predicate through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.findIn(items).exists(item -> criteria)
+	 * Do.findIn(items).first(item -> criteria)
+	 * Do.findIn(items).last(item -> criteria)
+	 * Do.findIn(items).any(item -> criteria)
+	 * Do.findIn(items).all(item -> criteria)
+	 * </code></pre>
 	 *
 	 * @param items the items to search through
 	 * @return DSL helper used to specify search criteria and execute the search through method chain call
@@ -86,6 +113,12 @@ public final class Do {
 	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
 	 * <p>
 	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.map(items).toList(item -> transformation)
+	 * Do.map(items).toSet(item -> transformation)
+	 * Do.map(items).toMap(item -> transformation)
+	 * </code></pre>
 	 *
 	 * @param items the items to map (transform)
 	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
@@ -101,6 +134,12 @@ public final class Do {
 	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
 	 * <p>
 	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.map(items).toList((key, value) -> transformation)
+	 * Do.map(items).toSet((key, value) -> transformation)
+	 * Do.map(items).toMap((key, value) -> transformation)
+	 * </code></pre>
 	 *
 	 * @param items the items to map (transform)
 	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
@@ -116,6 +155,12 @@ public final class Do {
 	 * Maps (transforms) the specified items by applying the transformation function that will be specified.
 	 * <p>
 	 * The mapping will be executed as soon as the transformation function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.map(items).toList(item -> transformation)
+	 * Do.map(items).toSet(item -> transformation)
+	 * Do.map(items).toMap(item -> transformation)
+	 * </code></pre>
 	 *
 	 * @param items the items to map (transform)
 	 * @return DSL helper used to specify transformation function and execute the mapping through method chain call
@@ -133,6 +178,10 @@ public final class Do {
 	 * Groups the specified items according to a classification function that will be specified.
 	 * <p>
 	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.group(items).by(item -> classifier)
+	 * </code></pre>
 	 *
 	 * @param items the items to group
 	 * @return DSL helper used to specify classification function and execute the grouping through method chain call
@@ -148,6 +197,10 @@ public final class Do {
 	 * Groups the specified items according to a classification function that will be specified.
 	 * <p>
 	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.group(items).by((key, value) -> classifier)
+	 * </code></pre>
 	 *
 	 * @param items the items to group
 	 * @return DSL helper used to specify classification function and execute the grouping through method chain call
@@ -163,6 +216,10 @@ public final class Do {
 	 * Groups the specified items according to a classification function that will be specified.
 	 * <p>
 	 * The grouping will be executed as soon as the classification function is specified through method chain call.
+	 * <p> Usage:
+	 * <pre><code>
+	 * Do.group(items).by(item -> classifier)
+	 * </code></pre>
 	 *
 	 * @param items the items to group
 	 * @return DSL helper used to specify classification function and execute the grouping through method chain call

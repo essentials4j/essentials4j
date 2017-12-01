@@ -27,6 +27,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
+ * DSL helper used to specify transformation function and execute the mapping through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
@@ -47,7 +49,7 @@ public class MapDSL<T> {
 	 * @return a new {@code List} consisting of the derived elements
 	 * @throws NullPointerException if {@code transformation} is {@code null}
 	 */
-	public <R> List<R> toList(Function<T, R> transformation) {
+	public <R> List<R> toList(Function<? super T, ? extends R> transformation) {
 		return stream.map(transformation).collect(To.list());
 	}
 
@@ -60,7 +62,7 @@ public class MapDSL<T> {
 	 * @return a new {@code Set} consisting of the derived elements
 	 * @throws NullPointerException if {@code transformation} is {@code null}
 	 */
-	public <R> Set<R> toSet(Function<T, R> transformation) {
+	public <R> Set<R> toSet(Function<? super T, ? extends R> transformation) {
 		return stream.map(transformation).collect(To.set());
 	}
 
@@ -74,7 +76,8 @@ public class MapDSL<T> {
 	 * @return a new {@code Map} consisting of the derived {@code (key, value)} entries
 	 * @throws NullPointerException if {@code keyTransformation} is {@code null} or {@code valueTransformation} is {@code null}
 	 */
-	public <K, V> Map<K, V> toMap(Function<T, K> keyTransformation, Function<T, V> valueTransformation) {
+	public <K, V> Map<K, V> toMap(Function<? super T, ? extends K> keyTransformation,
+	                              Function<? super T, ? extends V> valueTransformation) {
 		return stream.collect(To.map(keyTransformation, valueTransformation));
 	}
 

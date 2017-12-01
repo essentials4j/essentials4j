@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
+ * Common test helpers.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */

@@ -25,6 +25,8 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**
+ * DSL helper used to specify classification function and execute the grouping through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
@@ -49,7 +51,7 @@ public class GroupBiDSL<K, V> {
 	 * @return a new {@code Map} consisting of the grouped items
 	 * @throws NullPointerException if {@code classifier} is {@code null}
 	 */
-	public <R> Map<R, Map<K, V>> by(BiFunction<K, V, R> classifier) {
+	public <R> Map<R, Map<K, V>> by(BiFunction<? super K, ? super V, ? extends R> classifier) {
 		return items.entrySet().stream()
 			.collect(Collectors.groupingBy(e -> classifier.apply(e.getKey(), e.getValue()), New::map, To.map()));
 	}

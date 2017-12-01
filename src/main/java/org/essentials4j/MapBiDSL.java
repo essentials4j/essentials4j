@@ -26,6 +26,8 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 /**
+ * DSL helper used to specify transformation function and execute the mapping through method chain call.
+ *
  * @author Nikolche Mihajlovski
  * @since 1.0.0
  */
@@ -46,7 +48,7 @@ public class MapBiDSL<K, V> {
 	 * @return a new {@code List} consisting of the derived elements
 	 * @throws NullPointerException if {@code transformation} is {@code null}
 	 */
-	public <R> List<R> toList(BiFunction<K, V, R> transformation) {
+	public <R> List<R> toList(BiFunction<? super K, ? super V, ? extends R> transformation) {
 		return items.entrySet().stream()
 			.map(e -> transformation.apply(e.getKey(), e.getValue()))
 			.collect(To.list());
@@ -61,7 +63,7 @@ public class MapBiDSL<K, V> {
 	 * @return a new {@code Set} consisting of the derived elements
 	 * @throws NullPointerException if {@code transformation} is {@code null}
 	 */
-	public <R> Set<R> toSet(BiFunction<K, V, R> transformation) {
+	public <R> Set<R> toSet(BiFunction<? super K, ? super V, ? extends R> transformation) {
 		return items.entrySet().stream()
 			.map(e -> transformation.apply(e.getKey(), e.getValue()))
 			.collect(To.set());
@@ -77,8 +79,8 @@ public class MapBiDSL<K, V> {
 	 * @return a new {@code Map} consisting of the derived {@code (key, value)} entries
 	 * @throws NullPointerException if {@code keyTransformation} is {@code null} or {@code valueTransformation} is {@code null}
 	 */
-	public <K2, V2> Map<K2, V2> toMap(BiFunction<K, V, ? extends K2> keyTransformation,
-	                                  BiFunction<K, V, ? extends V2> valueTransformation) {
+	public <K2, V2> Map<K2, V2> toMap(BiFunction<? super K, ? super V, ? extends K2> keyTransformation,
+	                                  BiFunction<? super K, ? super V, ? extends V2> valueTransformation) {
 		return items.entrySet().stream()
 			.collect(To.map(
 				e -> keyTransformation.apply(e.getKey(), e.getValue()),
