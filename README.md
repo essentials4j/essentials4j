@@ -4,11 +4,7 @@ Essentials4j is a minimalistic library consisting of:
  - a thin layer of abstraction over Java 8 streams for easy manipulation of collections,
  - simple factory utils for elegant construction of collections.
 
-## Java 8 streams and collections made simple - with essentials4j
-
-Java 8 streams and collections are very powerful, but often we have to use them in a verbose way.
-
-#### With essentials4j you can write simple code like:
+## Example
 
 ```java
 Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
@@ -16,7 +12,7 @@ Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
 Map<Integer, String> even = Do.findIn(nums).all((k, v) -> k % 2 == 0); // {2:"two"}
 ```
 
-#### ... instead of:
+### The code above is a shortcut for:
 
 ```java
 Map<Integer, String> nums = new LinkedHashMap<>();
@@ -104,7 +100,7 @@ Map<Integer, String> thousands = Do.map(nums).toMap((k, v) -> k * 1000, (k, v) -
 Map<Boolean, Map<Integer, String>> even = Do.group(nums).by((k, v) -> k % 2 == 0);
 ```
 
-## Maven dependency (NOT RELEASED YET):
+## Maven dependency:
 
 ```xml
  <dependency>
