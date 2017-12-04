@@ -8,7 +8,7 @@ Essentials4j is a minimalistic library consisting of:
 
 Java 8 streams and collections are very powerful, but often we have to use them in a verbose way.
 
-Essentials4j offers a simpler way to do these everyday operations, for example:
+#### With essentials4j you can write simple code like:
 
 ```java
 Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
@@ -16,7 +16,7 @@ Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
 Map<Integer, String> even = Do.findIn(nums).all((k, v) -> k % 2 == 0); // {2:"two"}
 ```
 
-The above code is just a shortcut for:
+#### ... instead of:
 
 ```java
 Map<Integer, String> nums = new LinkedHashMap<>();
@@ -29,7 +29,20 @@ Map<Integer, String> even = nums.entrySet().stream()
     .collect(Collectors.toMap(Entry::getKey, Entry::getValue)); // {2:"two"}
 ```
 
-#### Searching through collections
+## Features
+
+What makes essentials4j perfect?
+ - Simple, elegant & straight to the point
+ - 100% test coverage
+ - 100% documentation coverage
+ - Open-source (Apache Public License v2)
+ - Lightweight (consists of only 9 classes)
+ - Self-contained (no dependencies)
+ - Only 15 KB JAR size
+
+## Usage
+
+### Searching through collections
 
 ```java
 List<String> abc = New.list("a", "bbb", "cc");
@@ -45,7 +58,7 @@ Optional<String> firstWord = Do.findIn(abc).first(s -> s.length() > 1); // "bbb"
 Optional<String> lastWord = Do.findIn(abc).last(s -> s.length() > 1); // "cc"
 ```
 
-#### Mapping and grouping collections
+### Mapping and grouping collections
 
 ```java
 List<String> abc = New.list("a", "bb", "cc");
@@ -59,10 +72,10 @@ Map<String, Integer> lengths3 = Do.map(abc).toMap(s -> s, String::length); // {"
 Map<Integer, List<String>> byLength = Do.group(abc).by(String::length); // {1:["a"], 2:["bb", "cc"]}
 ```
 
-#### Searching through maps
+### Searching through maps
 
 ```java
-Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
+Map<Integer, String> nums = New.map(-1, "neg", 0, "zero", 1, "pos");
 
 boolean hasPositive = Do.findIn(nums).exists((k, v) -> k > 0); // true
 
@@ -75,7 +88,7 @@ Optional<Entry<Integer, String>> firstNonZero = Do.findIn(nums).first((k, v) -> 
 Optional<Entry<Integer, String>> lastNonZero = Do.findIn(nums).last((k, v) -> k != 0); // 1:"pos"
 ```
 
-#### Mapping and grouping maps
+### Mapping and grouping maps
 
 ```java
 Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
