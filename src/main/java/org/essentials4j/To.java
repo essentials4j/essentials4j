@@ -49,7 +49,7 @@ public final class To {
 	/**
 	 * Returns a {@code Collector} that accumulates the input elements into a new {@code List}.
 	 * <p>
-	 * Equivalent to {@code Collectors.toList()}.
+	 * A shortcut for: {@code Collectors.toList()}.
 	 *
 	 * @param <T> the type of the output list elements
 	 * @return a new collector that accumulates the input elements into a new {@code List}
@@ -62,7 +62,7 @@ public final class To {
 	/**
 	 * Returns a {@code Collector} that accumulates the input elements into a new {@code Set}.
 	 * <p>
-	 * Equivalent to {@code Collectors.toSet()}.
+	 * A shortcut for: {@code Collectors.toSet()}.
 	 *
 	 * @param <T> the type of the output set elements
 	 * @return a new collector that accumulates the input elements into a new {@code Set}
