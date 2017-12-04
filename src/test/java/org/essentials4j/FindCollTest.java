@@ -31,38 +31,36 @@ import java.util.Optional;
  */
 public class FindCollTest extends TestCommons {
 
-	private List<String> abc() {
-		return New.list("a", "bbbbb", "cc");
-	}
+	private final List<String> abc = New.list("a", "bbb", "cc");
 
 	@Test
 	public void inExists() {
-		isTrue(Do.findIn(abc()).exists(s -> s.length() < 5));
-		isFalse(Do.findIn(abc().stream()).exists(s -> s.length() > 10));
+		isTrue(Do.findIn(abc).exists(s -> s.length() == 3));
+		isFalse(Do.findIn(abc.stream()).exists(s -> s.length() > 10));
 	}
 
 	@Test
 	public void allOfWhere() {
-		List<String> notSmall = Do.findIn(abc()).all(s -> s.length() > 1);
-		eq(notSmall, New.list("bbbbb", "cc"));
+		List<String> words = Do.findIn(abc).all(s -> s.length() > 1);
+		eq(words, New.list("bbb", "cc"));
 	}
 
 	@Test
 	public void anyOfWhere() {
-		Optional<String> big = Do.findIn(abc()).any(s -> s.length() == 5);
-		eq(big.get(), "bbbbb");
+		Optional<String> anyBig = Do.findIn(abc).any(s -> s.length() == 3);
+		eq(anyBig.get(), "bbb");
 	}
 
 	@Test
 	public void lastOfWhere() {
-		Optional<String> anyBig = Do.findIn(abc()).last(s -> s.length() > 4);
-		eq(anyBig.get(), "bbbbb");
+		Optional<String> lastWord = Do.findIn(abc).last(s -> s.length() > 1);
+		eq(lastWord.get(), "cc");
 	}
 
 	@Test
 	public void firstOfWhere() {
-		Optional<String> firstSmall = Do.findIn(abc()).first(s -> s.length() < 3);
-		eq(firstSmall.get(), "a");
+		Optional<String> firstWord = Do.findIn(abc).first(s -> s.length() > 1);
+		eq(firstWord.get(), "bbb");
 	}
 
 }

@@ -32,33 +32,30 @@ import java.util.Set;
  */
 public class DoMapTest extends TestCommons {
 
-	private Map<Integer, String> nums() {
-		return New.map(1, "one", 2, "two", 3, "three");
-	}
+	private final Map<Integer, String> nums = New.map(1, "one", 2, "two", 3, "three");
 
 	@Test
 	public void groupMapBy() {
-		Map<String, Map<Integer, String>> even = Do.group(nums()).by((k, v) -> k % 2 == 0 ? "even" : "odd");
-
-		eq(even, New.map("odd", New.map(1, "one", 3, "three"), "even", New.map(2, "two")));
+		Map<Boolean, Map<Integer, String>> even = Do.group(nums).by((k, v) -> k % 2 == 0);
+		eq(even, New.map(false, New.map(1, "one", 3, "three"), true, New.map(2, "two")));
 	}
 
 	@Test
 	public void mapToMap() {
-		Map<Integer, String> bignums = Do.map(nums()).toMap((k, v) -> k * 1000, (k, v) -> v.toUpperCase());
-		eq(bignums, New.map(1000, "ONE", 2000, "TWO", 3000, "THREE"));
+		Map<Integer, String> thousands = Do.map(nums).toMap((k, v) -> k * 1000, (k, v) -> v.toUpperCase());
+		eq(thousands, New.map(1000, "ONE", 2000, "TWO", 3000, "THREE"));
 	}
 
 	@Test
 	public void mapToSet() {
-		Set<Integer> valueLengths = Do.map(nums()).toSet((k, v) -> v.length());
-		eq(valueLengths, New.set(3, 5));
+		Set<Integer> wordLengths = Do.map(nums).toSet((k, v) -> v.length());
+		eq(wordLengths, New.set(3, 5));
 	}
 
 	@Test
 	public void mapToList() {
-		List<Integer> doubleKeys = Do.map(nums()).toList((k, v) -> k * 2);
-		eq(doubleKeys, New.list(2, 4, 6));
+		List<Integer> squared = Do.map(nums).toList((k, v) -> k * k);
+		eq(squared, New.list(1, 4, 9));
 	}
 
 }

@@ -33,32 +33,28 @@ import java.util.Set;
  */
 public class DoCollTest extends TestCommons {
 
-	private List<String> abc() {
-		return New.list("a", "bbbbb", "cc");
-	}
+	private final List<String> abc = New.list("a", "bb", "cc");
 
 	@Test
 	public void doMapToList() {
-		List<Integer> lengths2 = Do.map(abc()).toList(String::length);
-		eq(lengths2, New.list(1, 5, 2));
+		List<Integer> lengths = Do.map(abc).toList(String::length);
+		eq(lengths, New.list(1, 2, 2));
 	}
 
 	@Test
 	public void listToMap() {
-		Map<String, Integer> lengthsByWord = Do.map(abc()).toMap(s -> s, String::length);
-		expectMap(lengthsByWord, New.map("a", 1, "bbbbb", 5, "cc", 2));
+		Map<String, Integer> lengthsByWord = Do.map(abc).toMap(s -> s, String::length);
+		expectMap(lengthsByWord, New.map("a", 1, "bb", 2, "cc", 2));
 	}
 
 	@Test
 	public void listToMapConflicting() {
-		List<String> letters = New.list("a", "bb", "c");
-
 		try {
-			Do.map(letters).toMap(String::length, s -> s);
+			Do.map(abc).toMap(String::length, s -> s);
 
 		} catch (IllegalArgumentException e) {
 			// this is expected
-			eq(e.getMessage(), "Both values [a] and [c] have the same key!");
+			eq(e.getMessage(), "Both values [bb] and [cc] have the same key!");
 			return;
 		}
 
@@ -67,14 +63,14 @@ public class DoCollTest extends TestCommons {
 
 	@Test
 	public void groupListBy() {
-		Map<Integer, List<String>> byLengths = Do.group(abc()).by(String::length);
-		expectMap(byLengths, New.map(1, New.list("a"), 5, New.list("bbbbb"), 2, New.list("cc")));
+		Map<Integer, List<String>> byLength = Do.group(abc).by(String::length);
+		expectMap(byLength, New.map(1, New.list("a"), 2, New.list("bb", "cc")));
 	}
 
 	@Test
 	public void listToSet() {
-		Set<Integer> lengths3 = Do.map(abc()).toSet(String::length);
-		eq(lengths3, New.set(1, 2, 5));
+		Set<Integer> lengths = Do.map(abc).toSet(String::length);
+		eq(lengths, New.set(1, 2));
 	}
 
 }

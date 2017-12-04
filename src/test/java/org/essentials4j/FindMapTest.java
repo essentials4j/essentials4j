@@ -32,38 +32,36 @@ import java.util.Optional;
  */
 public class FindMapTest extends TestCommons {
 
-	private Map<Integer, String> nums() {
-		return New.map(1, "one", 2, "two", 3, "three");
-	}
+	private final Map<Integer, String> nums = New.map(-1, "neg", 0, "zero", 1, "pos");
 
 	@Test
 	public void inExists() {
-		isTrue(Do.findIn(nums()).exists((k, v) -> k == 2));
-		isFalse(Do.findIn(nums()).exists((k, v) -> k > 10));
+		isTrue(Do.findIn(nums).exists((k, v) -> k > 0));
+		isFalse(Do.findIn(nums).exists((k, v) -> k > 10));
 	}
 
 	@Test
 	public void allOfWhere() {
-		Map<Integer, String> notSmall = Do.findIn(nums()).all((k, v) -> k > 1);
-		eq(notSmall, New.map(2, "two", 3, "three"));
+		Map<Integer, String> notNegative = Do.findIn(nums).all((k, v) -> k >= 0);
+		eq(notNegative, New.map(0, "zero", 1, "pos"));
 	}
 
 	@Test
 	public void anyOfWhere() {
-		Optional<Entry<Integer, String>> big = Do.findIn(nums()).any((k, v) -> v.length() == 5);
-		eq(big.get(), 3, "three");
+		Optional<Entry<Integer, String>> anyNegative = Do.findIn(nums).any((k, v) -> k > 0);
+		eq(anyNegative.get(), 1, "pos");
 	}
 
 	@Test
 	public void lastOfWhere() {
-		Optional<Entry<Integer, String>> anyBig = Do.findIn(nums()).last((k, v) -> v.length() > 4);
-		eq(anyBig.get(), 3, "three");
+		Optional<Entry<Integer, String>> lastNonZero = Do.findIn(nums).last((k, v) -> k != 0);
+		eq(lastNonZero.get(), 1, "pos");
 	}
 
 	@Test
 	public void firstOfWhere() {
-		Optional<Entry<Integer, String>> first = Do.findIn(nums()).first((k, v) -> k >= 2);
-		eq(first.get(), 2, "two");
+		Optional<Entry<Integer, String>> firstNonZero = Do.findIn(nums).first((k, v) -> k != 0);
+		eq(firstNonZero.get(), -1, "neg");
 	}
 
 }
