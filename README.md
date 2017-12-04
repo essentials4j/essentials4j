@@ -6,7 +6,7 @@ Essentials4j is a minimalistic library consisting of:
 
 ## Why essentials4j? To make the simple things - simple!
 
-Java 8 streams and collections are very powerful, but very often we have not use & manipulate them in a verbose way. Essentials4j offers a simpler way to do this.
+Java 8 streams and collections are very powerful, but often we have to use them in a verbose way. Essentials4j offers a simpler way to do these everyday operations.
 
 For example, with essentials4j we could write code like:
 
@@ -24,7 +24,7 @@ nums.put(1, "one");
 nums.put(2, "two");
 nums.put(3, "three");
 
-Map<Integer, String> even = nums().entrySet().stream()
+Map<Integer, String> even = nums.entrySet().stream()
     .filter(entry -> entry.getKey() % 2 == 0)
     .collect(Collectors.toMap(Entry::getKey, Entry::getValue)); // {2:"two"}
 ```
