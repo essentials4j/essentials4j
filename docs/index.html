@@ -1,5 +1,190 @@
-<h1>Essentials for Java 8+</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h4>Coming soon...</h4>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<h5><a href="https://github.com/essentials4j/essentials4j">View on github</a></h5>
+    <title>essentials4j - the perfect library for every Java 8 project!</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/welcome.css" rel="stylesheet">
+    <link href="/css/syntax.css" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="essentials4j - the perfect library for every Java 8 project!">
+
+    
+
+</head>
+
+
+<body id="welcome-splash">
+
+<section id="header">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="title">essentials4j - the <b>perfect library</b> for every Java 8 project!</h1>
+                <br><br>
+            </div>
+        </div>
+        <div class="row row-features">
+            <div class="col-md-4">
+                <div class="fancy-circle fancy-primary">
+                    <span class="fancy-icon feature-icon"><span class="gg"><i class="fa fa-magic"></i></span></span>
+                </div>
+                <div class="fancy-desc">Simple, elegant & <br><b>straight to the point</b>!</div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="fancy-circle fancy-primary">
+                    <span class="fancy-icon feature-icon"><span class="gg"><i class="fa fa-check"></i></span></span>
+                </div>
+                <div class="fancy-desc"><b>100% test coverage</b>,<br>100% docs coverage!</div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="fancy-circle fancy-primary">
+                    <span class="fancy-icon feature-icon"><span class="gg"><i class="fa fa-star"></i></span></span>
+                </div>
+                <div class="fancy-desc">Lightweight & self-contained!<br>Only <b>15 KB JAR size</b></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 id="what-is-essentials4j">What is essentials4j?</h1>
+
+<p>Essentials4j is a minimalistic library consisting of:</p>
+<ul>
+  <li>a thin layer of abstraction over Java 8 streams for easy manipulation of collections,</li>
+  <li>simple factory utils for elegant construction of collections.</li>
+</ul>
+
+<h2 id="example">Example</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">even</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">all</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// {2:"two"}</span>
+</code></pre></div></div>
+
+<h3 id="the-code-above-is-a-shortcut-for">The code above is a shortcut for:</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+<span class="n">nums</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">);</span>
+<span class="n">nums</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">);</span>
+<span class="n">nums</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">even</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">entry</span> <span class="o">-&gt;</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="nl">Entry:</span><span class="o">:</span><span class="n">getKey</span><span class="o">,</span> <span class="nl">Entry:</span><span class="o">:</span><span class="n">getValue</span><span class="o">));</span> <span class="c1">// {2:"two"}</span>
+</code></pre></div></div>
+
+<h2 id="features">Features</h2>
+
+<p>What makes essentials4j perfect?</p>
+<ul>
+  <li>Simple, elegant &amp; straight to the point</li>
+  <li>100% test coverage</li>
+  <li>100% documentation coverage</li>
+  <li>Open-source (Apache Public License v2)</li>
+  <li>Lightweight (consists of only 9 classes)</li>
+  <li>Self-contained (no dependencies)</li>
+  <li>Only 15 KB JAR size</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="searching-through-collections">Searching through collections</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bbb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
+
+<span class="kt">boolean</span> <span class="n">hasLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">exists</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">// true</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">all</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// ["bbb", "cc"]</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">anyLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">any</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "a"</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">firstWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">first</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "bbb"</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lastWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">last</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "cc"</span>
+</code></pre></div></div>
+
+<h3 id="mapping-and-grouping-collections">Mapping and grouping collections</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toList</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// [1, 2, 2]</span>
+
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths2</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toSet</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span>  <span class="c1">// [1, 2]</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths3</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toMap</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">,</span> <span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {"a":1, "bb":2, "cc":2}</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">byLength</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">by</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {1:["a"], 2:["bb", "cc"]}</span>
+</code></pre></div></div>
+
+<h3 id="searching-through-maps">Searching through maps</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="s">"neg"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"zero"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"pos"</span><span class="o">);</span>
+
+<span class="kt">boolean</span> <span class="n">hasPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">exists</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// true</span>
+
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">notNegative</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">all</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// {0:"zero", 1:"pos"}</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">anyPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">any</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">firstNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">first</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// -1:"neg"</span>
+
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">lastNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">last</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
+</code></pre></div></div>
+
+<h3 id="mapping-and-grouping-maps">Mapping and grouping maps</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">squared</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toList</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span><span class="o">);</span> <span class="c1">// [1, 4, 9]</span>
+
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">wordLengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toSet</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> <span class="c1">// [3, 5]</span>
+
+<span class="c1">// {1000:"ONE", 2000:"TWO", 3000:"THREE"}</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">thousands</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toMap</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">,</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
+
+<span class="c1">// { false: {1:"one", 3:"three"}, true: {2:two} }</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">even</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">by</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="maven-dependency">Maven dependency:</h2>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.essentials4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>essentials4j<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+		</div>
+	</div>
+</div>
+
+
+<section id="footer">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Copyright &copy; 2017 Nikolche Mihajlovski.</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
