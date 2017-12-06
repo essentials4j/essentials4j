@@ -18,7 +18,6 @@ html, body {
 .fancy-icon {
     display: inline-block;
     font-size: 0;
-    cursor: pointer;
     margin: 15px 30px;
     width: 90px;
     height: 90px;
@@ -157,4 +156,17 @@ code, pre {
 h1, h2 {
     padding-top: 0.5em;
     padding-bottom: 0.2em;
+}
+
+a.light {
+    color: #ddff !important;
+    text-decoration: underline;
+}
+
+#perfect {
+    padding: 7px !important;
+    border: 1px solid #fff1 !important;
+    background: #2222 !important;
+    color: #ffff !important;
+    font-weight: bold;
 }
