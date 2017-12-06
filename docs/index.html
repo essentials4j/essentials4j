@@ -72,6 +72,8 @@
   <li>simple factory utils for elegant construction of collections.</li>
 </ul>
 
+<p>Java 8 streams are powerful, and essentials4j is just a fantastic way to use them!</p>
+
 <h2 id="example">Example</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
@@ -106,71 +108,164 @@
 
 <h2 id="usage">Usage</h2>
 
-<h3 id="searching-through-collections">Searching through collections</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bbb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
-
-<span class="kt">boolean</span> <span class="n">hasLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">exists</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">// true</span>
-
-<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">all</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// ["bbb", "cc"]</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">anyLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">any</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "a"</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">firstWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">first</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "bbb"</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lastWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">last</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "cc"</span>
-</code></pre></div></div>
-
-<h3 id="mapping-and-grouping-collections">Mapping and grouping collections</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
-
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toList</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// [1, 2, 2]</span>
-
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths2</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toSet</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span>  <span class="c1">// [1, 2]</span>
-
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths3</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toMap</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">,</span> <span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {"a":1, "bb":2, "cc":2}</span>
-
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">byLength</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">by</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {1:["a"], 2:["bb", "cc"]}</span>
-</code></pre></div></div>
-
-<h3 id="searching-through-maps">Searching through maps</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="s">"neg"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"zero"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"pos"</span><span class="o">);</span>
-
-<span class="kt">boolean</span> <span class="n">hasPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">exists</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// true</span>
-
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">notNegative</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">all</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// {0:"zero", 1:"pos"}</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">anyPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">any</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">firstNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">first</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// -1:"neg"</span>
-
-<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">lastNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">last</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
-</code></pre></div></div>
-
-<h3 id="mapping-and-grouping-maps">Mapping and grouping maps</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
-
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">squared</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toList</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span><span class="o">);</span> <span class="c1">// [1, 4, 9]</span>
-
-<span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">wordLengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toSet</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> <span class="c1">// [3, 5]</span>
-
-<span class="c1">// {1000:"ONE", 2000:"TWO", 3000:"THREE"}</span>
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">thousands</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toMap</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">,</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
-
-<span class="c1">// { false: {1:"one", 3:"three"}, true: {2:two} }</span>
-<span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">even</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">by</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
-</code></pre></div></div>
-
-<h2 id="maven-dependency">Maven dependency:</h2>
+<h3 id="maven-dependency">Maven dependency</h3>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.essentials4j<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>essentials4j<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<h3 id="api">API</h3>
+
+<h4 id="instantiation">Instantiation:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>   <span class="n">list</span>  <span class="o">=</span>  <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(...)</span>
+<span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>    <span class="n">set</span>   <span class="o">=</span>  <span class="n">New</span><span class="o">.</span><span class="na">set</span><span class="o">(...)</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>  <span class="n">map</span>   <span class="o">=</span>  <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(...)</span>
+</code></pre></div></div>
+
+<h4 id="searching">Searching:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>      <span class="n">results</span>  <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">all</span><span class="o">(</span><span class="n">predicate</span><span class="o">)</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>  <span class="n">any</span>      <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">any</span><span class="o">(</span><span class="n">predicate</span><span class="o">)</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>  <span class="n">first</span>    <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">first</span><span class="o">(</span><span class="n">predicate</span><span class="o">)</span>
+<span class="n">Optional</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>  <span class="n">last</span>     <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">last</span><span class="o">(</span><span class="n">predicate</span><span class="o">)</span>
+<span class="kt">boolean</span>      <span class="n">exists</span>   <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">exists</span><span class="o">(</span><span class="n">predicate</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="transforming">Transforming:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>   <span class="n">list</span>  <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">toList</span><span class="o">(</span><span class="n">transformation</span><span class="o">)</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>   <span class="n">set</span>   <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">toSet</span><span class="o">(</span><span class="n">transformation</span><span class="o">)</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>  <span class="n">map</span>   <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">items</span><span class="o">).</span><span class="na">toMap</span><span class="o">(</span><span class="n">keyTransformation</span><span class="o">,</span> <span class="n">valueTransformation</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="grouping-by-classifier">Grouping by classifier:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;&gt;</span>   <span class="n">groups</span>  <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">collection</span><span class="o">).</span><span class="na">by</span><span class="o">(</span><span class="n">classifier</span><span class="o">)</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;&gt;</span>  <span class="n">groups</span>  <span class="o">=</span>  <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">map</span><span class="o">).</span><span class="na">by</span><span class="o">(</span><span class="n">classifier</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="examples-searching-through-collections">Examples: searching through collections</h3>
+
+<p>Let’s search through this list of items in the following examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bbb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="find-all">Find all:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">all</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// ["bbb", "cc"]</span>
+</code></pre></div></div>
+
+<h4 id="find-any">Find any:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">anyLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">any</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "a"</span>
+</code></pre></div></div>
+
+<h4 id="find-first">Find first:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">firstWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">first</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "bbb"</span>
+</code></pre></div></div>
+
+<h4 id="find-last">Find last:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lastWord</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">last</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">);</span> <span class="c1">// "cc"</span>
+</code></pre></div></div>
+
+<h4 id="exists">Exists:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="n">hasLetter</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">exists</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<h3 id="examples-mapping-and-grouping-collections">Examples: mapping and grouping collections</h3>
+
+<p>Let’s transform this list of items in the following examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">abc</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"bb"</span><span class="o">,</span> <span class="s">"cc"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-list">Mapping to a List:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toList</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// [1, 2, 2]</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-set">Mapping to a Set:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths2</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toSet</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span>  <span class="c1">// [1, 2]</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-map">Mapping to a Map:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">lengths3</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">toMap</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">,</span> <span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {"a":1, "bb":2, "cc":2}</span>
+</code></pre></div></div>
+
+<h4 id="group-by">Group by:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">byLength</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">abc</span><span class="o">).</span><span class="na">by</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span> <span class="c1">// {1:["a"], 2:["bb", "cc"]}</span>
+</code></pre></div></div>
+
+<h3 id="examples-searching-through-maps">Examples: searching through maps</h3>
+
+<p>Let’s search through this map of items in the following examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(-</span><span class="mi">1</span><span class="o">,</span> <span class="s">"neg"</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="s">"zero"</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"pos"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="find-all-1">Find all:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">notNegative</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">all</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// {0:"zero", 1:"pos"}</span>
+</code></pre></div></div>
+
+<h4 id="find-any-1">Find any:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">anyPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">any</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
+</code></pre></div></div>
+
+<h4 id="find-first-1">Find first:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">firstNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">first</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// -1:"neg"</span>
+</code></pre></div></div>
+
+<h4 id="find-last-1">Find last:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">lastNonZero</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">last</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// 1:"pos"</span>
+</code></pre></div></div>
+
+<h4 id="exists-1">Exists:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="n">hasPositive</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">findIn</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">exists</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<h3 id="examples-mapping-and-grouping-maps">Examples: mapping and grouping maps</h3>
+
+<p>Let’s transform this map of items in the following examples:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="n">New</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"one"</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="s">"two"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"three"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-list-1">Mapping to a List:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">squared</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toList</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span><span class="o">);</span> <span class="c1">// [1, 4, 9]</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-set-1">Mapping to a Set:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">wordLengths</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toSet</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> <span class="c1">// [3, 5]</span>
+</code></pre></div></div>
+
+<h4 id="mapping-to-a-map-1">Mapping to a Map:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// {1000:"ONE", 2000:"TWO", 3000:"THREE"}</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">thousands</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">toMap</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">,</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
+</code></pre></div></div>
+
+<h4 id="group-by-1">Group by:</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// { false: {1:"one", 3:"three"}, true: {2:two} }</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">even</span> <span class="o">=</span> <span class="n">Do</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">by</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
 </code></pre></div></div>
 
 		</div>
