@@ -54,7 +54,13 @@
                 <div class="fancy-circle fancy-primary">
                     <span class="fancy-icon feature-icon"><span class="gg"><i class="fa fa-github"></i></span></span>
                 </div>
-                <div class="fancy-desc">Open-source (Apache License)<br>Source code on <a class="light" href="https://github.com/essentials4j/essentials4j">Github</a></div>
+                <div class="fancy-desc">Open-source (Apache License)<br>
+                    <div id="stars">
+                    <a data-count-api="/repos/essentials4j/essentials4j#stargazers_count"
+                       data-count-href="/essentials4j/essentials4j/stargazers" data-icon="octicon-star"
+                       href="https://github.com/essentials4j/essentials4j" class="github-button">Star</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -282,6 +288,8 @@
         </div>
     </div>
 </section>
+
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 </html>

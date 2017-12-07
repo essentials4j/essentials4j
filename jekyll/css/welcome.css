@@ -177,3 +177,7 @@ a.light {
     color: #ffff !important;
     font-weight: bold;
 }
+
+#stars {
+    margin-top: 3px;
+}
