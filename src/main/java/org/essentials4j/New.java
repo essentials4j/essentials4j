@@ -283,13 +283,15 @@ public final class New {
 	 * Constructs an insertion-ordered {@code LinkedHashMap} instance with {@code N} entries (specified as key-value pairs).
 	 *
 	 * @param keysAndValues the map's key-value pairs, in the form: {@code key1, value1, ..., keyN, valueN}
+	 * @param key1
+	 * @param value1
 	 * @param <K>           the type of the map keys
 	 * @param <V>           the type of the map values
 	 * @return a new {@code LinkedHashMap} instance consisting of the specified key-value pairs as entries
 	 * @throws NullPointerException if {@code keysAndValues} is {@code null}
 	 */
 	@SuppressWarnings("unchecked")
-	public static <K, V> Map<K, V> map(Object... keysAndValues) {
+	public static <K, V> Map<K, V> map(K key1, V value1, Object... keysAndValues) {
 		Objects.requireNonNull(keysAndValues);
 
 		if (keysAndValues.length % 2 != 0) {
@@ -297,6 +299,7 @@ public final class New {
 		}
 
 		Map<K, V> map = map();
+		map.put(key1, value1);
 
 		for (int i = 0; i < keysAndValues.length / 2; i++) {
 			map.put((K) keysAndValues[i * 2], (V) keysAndValues[i * 2 + 1]);

@@ -89,7 +89,7 @@ public class NewTest extends TestCommons {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidMapArgs() {
-		New.map("key without value");
+		New.map("key without value", 1, 3);
 	}
 
 	@Test
