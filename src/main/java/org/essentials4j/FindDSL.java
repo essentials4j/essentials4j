@@ -64,14 +64,14 @@ public class FindDSL<T> {
 			.findFirst();
 	}
 
-    /**
-     * Simple find the first element if there is one
-     *
-     * @return {@code Optional} wrapping the first element if it exists, or an empty {@code Optional}
-     */
-    public Optional<T> first() {
-        return first(TRUE);
-    }
+	/**
+	 * Simple find the first element if there is one
+	 *
+	 * @return {@code Optional} wrapping the first element if it exists, or an empty {@code Optional}
+	 */
+	public Optional<T> first() {
+		return first(TRUE);
+	}
 
     /**
 	 * Searches through the pre-specified items for the last element that satisfies the specified criteria (predicate).
@@ -85,14 +85,14 @@ public class FindDSL<T> {
 			.reduce((prev, next) -> next);
 	}
 
-    /**
-     * Simple find the last element if there is one
-     *
-     * @return {@code Optional} wrapping the last element if it exists, or an empty {@code Optional}
-     */
-    public Optional<T> last() {
-        return last(TRUE);
-    }
+	/**
+	 * Simple find the last element if there is one
+	 *
+	 * @return {@code Optional} wrapping the last element if it exists, or an empty {@code Optional}
+	 */
+	public Optional<T> last() {
+		return last(TRUE);
+	}
 
 	/**
 	 * Searches through the pre-specified items for any element that satisfies the specified criteria (predicate).

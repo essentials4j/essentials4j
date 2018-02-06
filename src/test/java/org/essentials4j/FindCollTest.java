@@ -33,7 +33,7 @@ import java.util.Optional;
 public class FindCollTest extends TestCommons {
 
 	private final List<String> abc = New.list("a", "bbb", "cc");
-    private final List<String> empty = Collections.emptyList();
+	private final List<String> empty = Collections.emptyList();
 
 	@Test
 	public void inExists() {
@@ -65,11 +65,11 @@ public class FindCollTest extends TestCommons {
 		eq(lastWord.get(), "cc");
 	}
 
-    @Test
-    public void noLastElement() {
-        Optional<String> lastWord = Do.findIn(empty).last();
-        isFalse(lastWord.isPresent());
-    }
+	@Test
+	public void noLastElement() {
+		Optional<String> lastWord = Do.findIn(empty).last();
+		isFalse(lastWord.isPresent());
+	}
 
 	@Test
 	public void firstOfWhere() {
@@ -77,16 +77,16 @@ public class FindCollTest extends TestCommons {
 		eq(firstMatch.get(), "bbb");
 	}
 
-    @Test
-    public void firstElement() {
-        Optional<String> firstWord = Do.findIn(abc).first();
-        eq(firstWord.get(), "a");
-    }
+	@Test
+	public void firstElement() {
+		Optional<String> firstWord = Do.findIn(abc).first();
+		eq(firstWord.get(), "a");
+	}
 
-    @Test
-    public void noFirstElement() {
-        Optional<String> firstWord = Do.findIn(empty).first();
-        isFalse(firstWord.isPresent());
-    }
+	@Test
+	public void noFirstElement() {
+		Optional<String> firstWord = Do.findIn(empty).first();
+		isFalse(firstWord.isPresent());
+	}
 
 }
