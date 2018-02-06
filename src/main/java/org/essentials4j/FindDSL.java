@@ -33,6 +33,8 @@ import java.util.stream.Stream;
  */
 public class FindDSL<T> {
 
+	private static final Predicate<Object> TRUE = x -> true;
+
 	private final Stream<T> stream;
 
 	FindDSL(Stream<T> stream) {
@@ -62,7 +64,16 @@ public class FindDSL<T> {
 			.findFirst();
 	}
 
-	/**
+    /**
+     * Simple find the first element if there is one
+     *
+     * @return {@code Optional} wrapping the first element if it exists, or an empty {@code Optional}
+     */
+    public Optional<T> first() {
+        return first(TRUE);
+    }
+
+    /**
 	 * Searches through the pre-specified items for the last element that satisfies the specified criteria (predicate).
 	 *
 	 * @param predicate the search criteria specified as a predicate function
@@ -73,6 +84,15 @@ public class FindDSL<T> {
 		return stream.filter(predicate)
 			.reduce((prev, next) -> next);
 	}
+
+    /**
+     * Simple find the last element if there is one
+     *
+     * @return {@code Optional} wrapping the last element if it exists, or an empty {@code Optional}
+     */
+    public Optional<T> last() {
+        return last(TRUE);
+    }
 
 	/**
 	 * Searches through the pre-specified items for any element that satisfies the specified criteria (predicate).
