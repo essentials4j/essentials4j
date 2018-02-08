@@ -22,6 +22,7 @@ package org.essentials4j;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ import java.util.Optional;
 public class FindCollTest extends TestCommons {
 
 	private final List<String> abc = New.list("a", "bbb", "cc");
+	private final List<String> empty = Collections.emptyList();
 
 	@Test
 	public void inExists() {
@@ -53,14 +55,38 @@ public class FindCollTest extends TestCommons {
 
 	@Test
 	public void lastOfWhere() {
-		Optional<String> lastWord = Do.findIn(abc).last(s -> s.length() > 1);
+		Optional<String> lastMatch = Do.findIn(abc).last(s -> s.length() > 1);
+		eq(lastMatch.get(), "cc");
+	}
+
+	@Test
+	public void lastElement() {
+		Optional<String> lastWord = Do.findIn(abc).last();
 		eq(lastWord.get(), "cc");
 	}
 
 	@Test
+	public void noLastElement() {
+		Optional<String> lastWord = Do.findIn(empty).last();
+		isFalse(lastWord.isPresent());
+	}
+
+	@Test
 	public void firstOfWhere() {
-		Optional<String> firstWord = Do.findIn(abc).first(s -> s.length() > 1);
-		eq(firstWord.get(), "bbb");
+		Optional<String> firstMatch = Do.findIn(abc).first(s -> s.length() > 1);
+		eq(firstMatch.get(), "bbb");
+	}
+
+	@Test
+	public void firstElement() {
+		Optional<String> firstWord = Do.findIn(abc).first();
+		eq(firstWord.get(), "a");
+	}
+
+	@Test
+	public void noFirstElement() {
+		Optional<String> firstWord = Do.findIn(empty).first();
+		isFalse(firstWord.isPresent());
 	}
 
 }
